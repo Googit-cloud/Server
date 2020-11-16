@@ -21,8 +21,14 @@ const UserSchema = new mongoose.Schema({
   profile_img_url: {
     type: String,
   },
-  my_branches: [],
-  shared_branches_info: [],
+  my_branches: [{
+    type: mongoose.Schema.Types.ObjectId,
+    ref: 'Branch',
+  }],
+  shared_branches_info: [{
+    type: mongoose.Schema.Types.ObjectId,
+    ref: 'BranchSharingInfo',
+  }],
 });
 
 const User = mongoose.model('User', UserSchema);
