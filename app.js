@@ -28,15 +28,23 @@ app.use('/', index);
 app.use('/users', users);
 
 app.use((req, res, next) => {
-  next(createError(404));
+  next(createError(404, '페이지를 찾을 수 없어요'));
 });
 
-app.use((err, req, res) => {
-  res.locals.message = err.message;
-  res.locals.error = req.app.get('env') === 'development' ? err : {};
+app.use((err, req, res, next) => {
+  console.log(err);
 
-  res.status(err.status || 500);
-  res.render('error');
+  const message
+    = err.statusCode === 404
+      ? err.message
+      : '서버에 문제가 생겼어요';
+
+  res
+    .status(err.statusCode || 500)
+    .json({
+      result: 'failure',
+      message,
+    });
 });
 
 module.exports = app;

@@ -10,8 +10,6 @@ exports.registerUser = async (req, res, next) => {
 
     res.status(201).json({ result: 'ok' });
   } catch (err) {
-    console.log(err.message);
-
     if (err.message.includes('duplicate key error')) {
       res.status(303).json({
         result: 'failure',
@@ -21,10 +19,7 @@ exports.registerUser = async (req, res, next) => {
       return;
     }
 
-    res.json({
-      result: 'failure',
-      message: '오류가 났어요'
-    });
+    next(err);
   }
 };
 
@@ -35,14 +30,11 @@ exports.loginUser = async (req, res, next) => {
   try {
     user = await new UserService().getUserByEmail(email);
   } catch (err) {
-    res.json({
-      result: 'failure',
-      message: '오류가 났어요',
-    });
+    next(err);
   }
 
   if (!user) {
-    res.json({
+    res.status(404).json({
       result: 'failure',
       message: '가입하지 않은 사용자예요',
     });
