@@ -14,15 +14,12 @@ exports.verifyUser = async (req, res, next) => {
     if (!user) {
       res.status(404).json({
         result: 'failure',
-        message: 'bad request',
+        message: '이용자를 찾지 못했어요',
       });
     }
 
     next();
   } catch (err) {
-    res.status(400).json({
-      result: 'failure',
-      message: 'bad request'
-    });
+    next(err);
   }
 };
