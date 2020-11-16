@@ -1,9 +1,6 @@
-const express = require('express');
-const router = express.Router();
 const jwt = require('jsonwebtoken');
-const User = require('../models/User');
 
-router.get('/current-user', async (req, res, next) => {
+exports.verifyUser = async (req, res, next) => {
   const token = req.headers.authorization.split(' ')[1];
 
   try {
@@ -14,16 +11,18 @@ router.get('/current-user', async (req, res, next) => {
 
     const user = await User.findById(decoded._id);
 
-    res.status(200).json({
-      result: 'ok',
-      user,
-    });
+    if (!user) {
+      res.status(404).json({
+        result: 'failure',
+        message: 'bad request',
+      });
+    }
+
+    next();
   } catch (err) {
     res.status(400).json({
       result: 'failure',
       message: 'bad request'
     });
   }
-});
-
-module.exports = router;
+};
