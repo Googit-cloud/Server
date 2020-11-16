@@ -1,16 +1,12 @@
-const User = require('../../models/User');
+const UserService = require('../../services/user.service');
 const jwt = require('jsonwebtoken');
 
 exports.registerUser = async (req, res, next) => {
   const { uid, email, displayName, photoURL } = req.body;
 
   try {
-    await User.create({
-      uid,
-      email,
-      username: displayName,
-      profile_img_url: photoURL,
-    });
+    await new UserService()
+      .createUser(uid, email, displayName, photoURL);
 
     res.status(201).json({ result: 'ok' });
   } catch (err) {
@@ -37,7 +33,7 @@ exports.loginUser = async (req, res, next) => {
   let user;
 
   try {
-    user = await User.findOne({ email });
+    user = await new UserService().getUserByEmail(email);
   } catch (err) {
     res.json({
       result: 'failure',
