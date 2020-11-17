@@ -29,6 +29,7 @@ const UserSchema = new mongoose.Schema({
     type: mongoose.Schema.Types.ObjectId,
     ref: 'BranchSharingInfo',
   }],
+
 });
 
 const User = mongoose.model('User', UserSchema);
