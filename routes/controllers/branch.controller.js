@@ -8,11 +8,30 @@ exports.createBranch = async (req, res, next) => {
       shared_users_info: [],
     });
 
-    console.log(newBranch);
-
     res.status(201).json({
       result: 'ok',
-      newBranchId: newBranch._id
+      newBranch
+    });
+  } catch (err) {
+    next(err);
+  }
+};
+
+exports.unShiftNoteToBranch = async (req, res, next) => {
+  const branch = req.body;
+  const { branch_id, note_id } = req.params;
+
+  branch.notes.unshift(note_id);
+
+  try {
+    await Branch.findByIdAndUpdate(
+      branch_id,
+      branch,
+      { new: true },
+    );
+
+    res.status(200).json({
+      result: 'ok'
     });
   } catch (err) {
     next(err);

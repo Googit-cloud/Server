@@ -30,6 +30,7 @@ exports.loginUser = async (req, res, next) => {
   try {
     user = await new UserService().getUserByEmail(email);
   } catch (err) {
+
     next(err);
   }
 
