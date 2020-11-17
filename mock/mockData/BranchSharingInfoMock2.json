@@ -1,0 +1,12 @@
+[
+  {
+    "user_id": "5fb281cb21be75511fcc0e05",
+    "branch_id": "5fb381c8664091175a0e7b42",
+    "has_writing_permission": true
+  },
+  {
+    "user_id": "5fb37ee5ce455f18ad88e8c0",
+    "branch_id": "5fb381c8664091175a0e7b3f",
+    "has_writing_permission": true
+  }
+]
