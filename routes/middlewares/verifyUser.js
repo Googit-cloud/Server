@@ -1,6 +1,6 @@
 const jwt = require('jsonwebtoken');
 
-exports.verifyUser = async (req, res, next) => {
+exports.verifyToken = async (req, res, next) => {
   const token = req.headers.authorization.split(' ')[1];
 
   try {
