@@ -1,6 +1,7 @@
+const UserService = require('../../services/user.service');
 const jwt = require('jsonwebtoken');
 
-exports.verifyToken = async (req, res, next) => {
+const verifyToken = async (req, res, next) => {
   const token = req.headers.authorization.split(' ')[1];
 
   try {
@@ -9,7 +10,9 @@ exports.verifyToken = async (req, res, next) => {
       process.env.JWT_SECRET_KEY
     );
 
-    const user = await User.findById(decoded._id);
+    const user
+      = await new UserService()
+        .getUserByMongooseId(decoded._id);
 
     if (!user) {
       res.status(404).json({
@@ -23,3 +26,5 @@ exports.verifyToken = async (req, res, next) => {
     next(err);
   }
 };
+
+module.exports = verifyToken;
