@@ -1,0 +1,39 @@
+[
+  {
+    "_id": "5fb381c8664091175a0e7b3f",
+    "created_by": "5fb281cb21be75511fcc0e05",
+    "notes": [
+      "5fb380f9664091175a0e7b3a",
+      "5fb380f9664091175a0e7b3b"
+    ],
+    "shared_users_info": [
+      "5fb37ee5ce455f18ad88e8c0"
+    ]
+  },
+  {
+    "_id": "5fb381c8664091175a0e7b40",
+    "created_by": "5fb281cb21be75511fcc0e05",
+    "notes": [
+      "5fb380f9664091175a0e7b3d"
+    ],
+    "shared_users_info": []
+  },
+  {
+    "_id": "5fb381c8664091175a0e7b41",
+    "created_by": "5fb37ee5ce455f18ad88e8c0",
+    "notes": [
+      "5fb380f9664091175a0e7b3c"
+    ],
+    "shared_users_info": []
+  },
+  {
+    "_id": "5fb381c8664091175a0e7b42",
+    "created_by": "5fb37ee5ce455f18ad88e8c0",
+    "notes": [
+      "5fb380f9664091175a0e7b3e"
+    ],
+    "shared_users_info": [
+      "5fb281cb21be75511fcc0e05"
+    ]
+  }
+]

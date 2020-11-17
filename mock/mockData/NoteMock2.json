@@ -1,0 +1,37 @@
+[
+  {
+    "_id": "5fb380f9664091175a0e7b3a",
+    "created_by": "5fb281cb21be75511fcc0e05",
+    "parent": "not yet",
+    "title": "mock note 1",
+    "content": "mock content 1"
+  },
+  {
+    "_id": "5fb380f9664091175a0e7b3b",
+    "created_by": "5fb281cb21be75511fcc0e05",
+    "parent": "not yet",
+    "title": "mock note 2",
+    "content": "mock content 2"
+  },
+  {
+    "_id": "5fb380f9664091175a0e7b3c",
+    "created_by": "5fb37ee5ce455f18ad88e8c0",
+    "parent": "not yet",
+    "title": "mock note 3",
+    "content": "mock content 3"
+  },
+  {
+    "_id": "5fb380f9664091175a0e7b3d",
+    "created_by": "5fb281cb21be75511fcc0e05",
+    "parent": "not yet",
+    "title": "mock note 4",
+    "content": "mock content 4"
+  },
+  {
+    "_id": "5fb380f9664091175a0e7b3e",
+    "created_by": "5fb37ee5ce455f18ad88e8c0",
+    "parent": "not yet",
+    "title": "mock note 5",
+    "content": "mock content 5"
+  }
+]
