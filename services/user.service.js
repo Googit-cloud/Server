@@ -26,6 +26,14 @@ class UserService {
       throw err;
     }
   }
+
+  async getUserByMongooseId(id) {
+    try {
+      return await User.findById(id);
+    } catch (err) {
+      throw err;
+    }
+  }
 }
 
 module.exports = UserService;
