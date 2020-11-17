@@ -33,6 +33,7 @@ exports.unShiftNoteToBranch = async (req, res, next) => {
 
     res.status(200).json({
       result: 'ok'
+<<<<<<< HEAD
     });
   } catch (err) {
     next(err);
@@ -48,6 +49,8 @@ exports.getBranches = async (req, res, next) => {
     const branchId = users.my_branches;
     const branches = branchId.map((id) => {
 
+=======
+>>>>>>> feat: create branch and note on client post
     });
     res.json('success');
   } catch (err) {
