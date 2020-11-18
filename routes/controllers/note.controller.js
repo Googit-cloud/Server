@@ -1,23 +1,26 @@
-const Note = require('../../models/Note');
+const NoteService = require('../../services/note.service');
+const BranchService = require('../../services/branch.service');
 
 exports.createNote = async (req, res, next) => {
-  console.log('----쪽지----');
-  console.log(req.params);
-  console.log(req.body);
-  const { title, content, branchId } = req.body;
-  try {
-    const newNote = await Note.create({
-      created_by: req.params.user_id,
-      parent: branchId,
-      title,
-      content,
-    });
+  const { title, content, branch } = req.body;
 
-    console.log(newNote);
+  try {
+    const newNote
+      = await new NoteService().createNote(
+        req.params.user_id,
+        branch._id,
+        title,
+        content
+      );
+
+    branch.notes.push(newNote._id);
+
+    await new BranchService()
+      .getBranchByMongooseIdAndUpdate(branch._id, branch);
 
     res.status(201).json({
       result: 'ok',
-      newNote
+      newNote,
     });
   } catch (err) {
     next(err);

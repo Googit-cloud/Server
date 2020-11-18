@@ -5,13 +5,12 @@ const NoteSchema = new mongoose.Schema({
     type: mongoose.Schema.Types.ObjectId, // virtual?
     ref: 'User',
   },
-  // parent: {
-  //   type: mongoose.Schema.Types.ObjectId,
-  //   ref: 'Branch',
-  // },
+  parent: {
+    type: mongoose.Schema.Types.ObjectId,
+    ref: 'Branch',
+  },
   title: {
     type: String,
-    // required: true,
   },
   content: {
     type: String,

@@ -1,23 +1,29 @@
-const User = require('../models/User');
 const Branch = require('../models/Branch');
-const BranchSaringInfo = require('../models/BranchSharingInfo');
-const { getBranches } = require('../routes/controllers/branch.controller');
-const { find } = require('../models/User');
 
 class BranchService {
-  constructor(userMongooseId, mode) {
-    this.user = userMongooseId;
-    this.mode = mode;
-  }
-
-  async getBranches() {
+  async createBranch(user_id) {
     try {
-      //regular
-
+      return await Branch.create({
+        created_by: user_id,
+        notes: [],
+        shared_users_info: [],
+      });
     } catch (err) {
-
+      throw err;
     }
-
   }
 
+  async getBranchByMongooseIdAndUpdate(id, branch) {
+    try {
+      await Branch.findByIdAndUpdate(
+        id,
+        branch,
+        { new: true },
+      );
+    } catch (err) {
+      throw err;
+    }
+  }
 }
+
+module.exports = BranchService;
