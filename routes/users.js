@@ -8,8 +8,7 @@ const { createNote } = require('./controllers/note.controller');
 
 router.get('/current-user', getCurrentUser);
 router.post('/:user_id/branches/new', verifyToken, createBranch);
-router.post('/:user_id/notes/new', createNote);
-router.patch('/:user_id/branches/:branch_id/notes/:note_id', unShiftNoteToBranch);
+router.post('/:user_id/notes/new', verifyToken, createNote);
 
 router.get('/:user_id/branches', verifyToken, getBranches);
 router.get('/:user_id/branches/private', verifyToken, getPrivateBranches);
