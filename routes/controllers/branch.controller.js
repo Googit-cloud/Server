@@ -1,38 +1,24 @@
 const User = require('../../models/User');
-const Branch = require('../../models/Branch');
+const BranchService = require('../../services/branch.service');
+const UserService = require('../../services/user.service');
 
 exports.createBranch = async (req, res, next) => {
+  const user = req.body;
+  const { user_id } = req.params;
+
   try {
-    const newBranch = await Branch.create({
-      created_by: req.params.user_id,
-      notes: [],
-      shared_users_info: [],
-    });
+    const newBranch = await new BranchService().createBranch(user_id);
+
+    user.my_branches.push(newBranch._id);
+
+    const updatedUser
+      = await new UserService()
+        .getUserByMongooseIdAndUpdate(user_id, user);
 
     res.status(201).json({
       result: 'ok',
-      newBranch
-    });
-  } catch (err) {
-    next(err);
-  }
-};
-
-exports.unShiftNoteToBranch = async (req, res, next) => {
-  const branch = req.body;
-  const { branch_id, note_id } = req.params;
-
-  branch.notes.unshift(note_id);
-
-  try {
-    await Branch.findByIdAndUpdate(
-      branch_id,
-      branch,
-      { new: true },
-    );
-
-    res.status(200).json({
-      result: 'ok'
+      newBranch,
+      updatedUser,
     });
   } catch (err) {
     next(err);

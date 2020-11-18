@@ -3,7 +3,7 @@ const router = express.Router();
 
 const verifyToken = require('./middlewares/verifyToken');
 const { getCurrentUser } = require('./controllers/user.controller');
-const { createBranch, getBranches, getPrivateBranches, unShiftNoteToBranch } = require('./controllers/branch.controller');
+const { createBranch, getBranches, getPrivateBranches } = require('./controllers/branch.controller');
 const { createNote } = require('./controllers/note.controller');
 
 router.get('/current-user', getCurrentUser);

@@ -1,3 +1,4 @@
+const mongoose = require('mongoose');
 const Note = require('../models/Note');
 
 class NoteService {
@@ -5,7 +6,7 @@ class NoteService {
     try {
       return await Note.create({
         created_by: user_id,
-        parent: branch_id,
+        parent: mongoose.Types.ObjectId(branch_id),
         title,
         content,
       });
