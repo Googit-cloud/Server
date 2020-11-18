@@ -29,7 +29,7 @@ exports.createBranch = async (req, res, next) => {
 
 exports.getBranches = async (req, res, next) => {
   try {
-    console.log('all')
+    console.log('all');
     const userId = req.params.user_id;
     const users = await User.findById(userId);
 
@@ -53,12 +53,12 @@ exports.getBranches = async (req, res, next) => {
     const myBranchesIds = users.my_branches;
     const myBranches = await Promise.all(
       myBranchesIds.map(async (branchId) => {
-        const myBranch = await Branch.findById(branchId)
+        const myBranch = await Branch.findById(branchId);
         return myBranch;
       })
     );
 
-    const accessibleBranchList = [...sharedBranches, ...myBranches]
+    const accessibleBranchList = [...sharedBranches, ...myBranches];
     // console.log(userId, 'the userId of the current user in regular')
     // console.log(sharedBranches, 'shared branch list from the current user in regular')
     // console.log(myBranches, 'the list of the branches created by the current user in regular');
@@ -74,7 +74,7 @@ exports.getBranches = async (req, res, next) => {
 
 exports.getPrivateBranches = async (req, res, next) => {
   try {
-    console.log('private')
+    console.log('private');
     console.log(req.params, req.originalUrl, 'private');
 
     const userId = req.params.user_id;
@@ -83,7 +83,7 @@ exports.getPrivateBranches = async (req, res, next) => {
     const myBranchesIds = users.my_branches;
     const myBranches = await Promise.all(
       myBranchesIds.map(async (branchId) => {
-        const myBranch = await Branch.findById(branchId)
+        const myBranch = await Branch.findById(branchId);
         return myBranch;
       })
     );
