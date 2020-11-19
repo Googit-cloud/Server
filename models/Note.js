@@ -15,7 +15,6 @@ const NoteSchema = new mongoose.Schema({
   content: {
     type: String,
   },
-  // changes: [], // markup 저장,, 비교할땐 태그 빼고 비교...
   previous_version: {
     type: mongoose.Schema.Types.ObjectId,
     default: null,
@@ -33,6 +32,7 @@ const NoteSchema = new mongoose.Schema({
   }
 });
 
+NoteSchema.index({ title: 'text', content: 'text' });
 const Note = mongoose.model('Note', NoteSchema);
 
 module.exports = Note;

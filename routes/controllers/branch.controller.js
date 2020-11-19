@@ -1,8 +1,10 @@
+const mongoose = require('mongoose');
 const User = require('../../models/User');
 const BranchService = require('../../services/branch.service');
 const UserService = require('../../services/user.service');
 const Branch = require('../../models/Branch');
 const BranchSharingInfo = require('../../models/BranchSharingInfo');
+const Note = require('../../models/Note');
 
 exports.createBranch = async (req, res, next) => {
   const user = req.body;
@@ -29,68 +31,165 @@ exports.createBranch = async (req, res, next) => {
 
 exports.getBranches = async (req, res, next) => {
   try {
-    console.log('all');
+    const { skip, limit, private, q } = req.query;
     const userId = req.params.user_id;
-    const users = await User.findById(userId);
+    let myBranches, sharedBranches;
 
-    // get shared branches info through branchSharingInfo
-    const branchSharingInfoIds = users.shared_branches_info;
-    const sharedBranchesIds = await Promise.all(
-      branchSharingInfoIds.map(async (sharingInfo) => {
-        const branchesSharingInfo = await BranchSharingInfo.findById(sharingInfo);
-        return branchesSharingInfo.branch_id;
-      })
-    );
+    if (q) {
+      //my branch를 훑는 법
+      myBranches = await User.aggregate([
+        { $match: { '_id': mongoose.Types.ObjectId(userId) } },
+        {
+          $lookup: {
+            from: 'branches',
+            localField: 'my_branches',
+            foreignField: '_id',
+            as: 'branchWrittenBycurrentUser'
+          }
+        },
+        {
+          $lookup: {
+            from: 'notes',
+            localField: 'branchWrittenBycurrentUser.latestNote',
+            foreignField: '_id',
+            as: 'noteList'
+          }
+        },
+        { $project: { 'noteList': true } },
+        { $unwind: '$noteList' },
+        {
+          $match:
+          {
+            $or: [
+              { 'noteList.title': { $regex: `4`, $options: 'g' } }, //`${q}`
+              { 'noteList.content': { $regex: `2`, $options: 'g' } },//`${q}`
+            ]
+          }
+        },
+      ]);
 
-    const sharedBranches = await Promise.all(
-      sharedBranchesIds.map(async (branchId) => {
-        const sharedBranch = await Branch.findById(branchId);
-        return sharedBranch;
-      })
-    );
+      //shared iterate
+      sharedBranches = await User.aggregate([
+        { $match: { '_id': mongoose.Types.ObjectId(userId) } },
+        {
+          $lookup: {
+            from: 'branchsharinginfos',
+            localField: 'shared_branches_info',
+            foreignField: '_id',
+            as: 'sharingInfoOfcurrentUser'
+          }
+        },
+        {
+          $lookup: {
+            from: 'branches',
+            localField: 'sharingInfoOfcurrentUser.branch_id',
+            foreignField: '_id',
+            as: 'branchSharedToCurrentUser'
+          }
+        },
+        {
+          $lookup: {
+            from: 'branches',
+            localField: 'sharingInfoOfcurrentUser.branch_id',
+            foreignField: '_id',
+            as: 'branchSharedToCurrentUser'
+          }
+        },
+        {
+          $lookup: {
+            from: 'notes',
+            localField: 'branchSharedToCurrentUser.latestNote',
+            foreignField: '_id',
+            as: 'noteList'
+          }
+        },
+        { $project: { 'noteList': true } },
+        { $unwind: '$noteList' },
+        {
+          $match:
+          {
+            $or: [
+              { 'noteList.title': { $regex: `5`, $options: 'g' } },//`${q}`
+              { 'noteList.content': { $regex: `2`, $options: 'g' } },//`${q}`
+            ]
+          }
+        },
+      ]);
+    } else {
 
-    // get branches by my_branches
-    const myBranchesIds = users.my_branches;
-    const myBranches = await Promise.all(
-      myBranchesIds.map(async (branchId) => {
-        const myBranch = await Branch.findById(branchId);
-        return myBranch;
-      })
-    );
+      myBranches = await User.aggregate([
+        { $match: { '_id': mongoose.Types.ObjectId(userId) } },
+        {
+          $lookup: {
+            from: 'branches',
+            localField: 'my_branches',
+            foreignField: '_id',
+            as: 'branchWrittenBycurrentUser'
+          }
+        },
+        {
+          $lookup: {
+            from: 'notes',
+            localField: 'branchWrittenBycurrentUser.latestNote',
+            foreignField: '_id',
+            as: 'noteList'
+          }
+        },
+        { $project: { 'noteList': true } },
+        { $unwind: '$noteList' },
+      ]);
 
-    const accessibleBranchList = [...sharedBranches, ...myBranches];
-    // console.log(userId, 'the userId of the current user in regular')
-    // console.log(sharedBranches, 'shared branch list from the current user in regular')
-    // console.log(myBranches, 'the list of the branches created by the current user in regular');
+      //shared iterate
+      sharedBranches = await User.aggregate([
+        { $match: { '_id': mongoose.Types.ObjectId(userId) } },
+        {
+          $lookup: {
+            from: 'branchsharinginfos',
+            localField: 'shared_branches_info',
+            foreignField: '_id',
+            as: 'sharingInfoOfcurrentUser'
+          }
+        },
+        {
+          $lookup: {
+            from: 'branches',
+            localField: 'sharingInfoOfcurrentUser.branch_id',
+            foreignField: '_id',
+            as: 'branchSharedToCurrentUser'
+          }
+        },
+        {
+          $lookup: {
+            from: 'branches',
+            localField: 'sharingInfoOfcurrentUser.branch_id',
+            foreignField: '_id',
+            as: 'branchSharedToCurrentUser'
+          }
+        },
+        {
+          $lookup: {
+            from: 'notes',
+            localField: 'branchSharedToCurrentUser.latestNote',
+            foreignField: '_id',
+            as: 'noteList'
+          }
+        },
+        { $project: { 'noteList': true } },
+        { $unwind: '$noteList' },
+      ]);
+    }
+
+    const accessibleNoteList = [...myBranches, ...sharedBranches];
+    accessibleNoteList.sort((a, b) => {
+      let left, right;
+      if (left > right) return 1;
+      else if (left === right) return 0;
+      else return -1;
+    });
 
     res.status(200).json({
       result: 'ok',
-      data: accessibleBranchList
-    });
-  } catch (err) {
-    next(err);
-  }
-};
-
-exports.getPrivateBranches = async (req, res, next) => {
-  try {
-    console.log('private');
-    console.log(req.params, req.originalUrl, 'private');
-
-    const userId = req.params.user_id;
-    const users = await User.findById(userId);
-
-    const myBranchesIds = users.my_branches;
-    const myBranches = await Promise.all(
-      myBranchesIds.map(async (branchId) => {
-        const myBranch = await Branch.findById(branchId);
-        return myBranch;
-      })
-    );
-
-    res.json({
-      result: 'ok',
-      data: myBranches
+      data: accessibleNoteList
     });
   } catch (err) {
     next(err);
