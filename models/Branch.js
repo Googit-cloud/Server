@@ -6,14 +6,18 @@ const BranchSchema = new mongoose.Schema({
     required: true,
     ref: 'User',
   },
-  notes: [{
+  notes_history: [{
     type: mongoose.Schema.Types.ObjectId,
     ref: 'Note'
   }],
   shared_users_info: [{
     type: mongoose.Schema.Types.ObjectId,
     ref: 'BranchSharingInfo',
-  }]
+  }],
+  latest_note: {
+    type: mongoose.Schema.Types.ObjectId,
+    ref: 'Note',
+  }
 }, {
   timestamps: {
     createdAt: 'created_at',

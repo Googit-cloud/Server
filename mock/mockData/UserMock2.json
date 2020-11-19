@@ -1,6 +1,38 @@
 [
   {
     "_id": "5fb281cb21be75511fcc0e05",
+    "accessibleBranches": [
+      "5fb381c8664091175a0e7b3f",
+      "5fb381c8664091175a0e7b40",
+      "5fb381c8664091175a0e7b41",
+      "5fb381c8664091175a0e7b42",
+      "5fb57700f33a4f48fa82c45c",
+      "5fb57700f33a4f48fa82c45d",
+      "5fb57700f33a4f48fa82c45e",
+      "5fb57700f33a4f48fa82c45f",
+      "5fb57700f33a4f48fa82c460",
+      "5fb57700f33a4f48fa82c461",
+      "5fb57700f33a4f48fa82c462",
+      "5fb57700f33a4f48fa82c463",
+      "5fb57700f33a4f48fa82c464",
+      "5fb57700f33a4f48fa82c465",
+      "5fb57700f33a4f48fa82c466",
+      "5fb57700f33a4f48fa82c467",
+      "5fb57700f33a4f48fa82c468",
+      "5fb57700f33a4f48fa82c469",
+      "5fb57700f33a4f48fa82c46a",
+      "5fb57700f33a4f48fa82c46b",
+      "5fb57700f33a4f48fa82c46d",
+      "5fb57700f33a4f48fa82c46c",
+      "5fb57700f33a4f48fa82c46e",
+      "5fb57700f33a4f48fa82c470",
+      "5fb57700f33a4f48fa82c471",
+      "5fb57700f33a4f48fa82c46f",
+      "5fb57700f33a4f48fa82c472",
+      "5fb57700f33a4f48fa82c473",
+      "5fb57700f33a4f48fa82c474",
+      "5fb57700f33a4f48fa82c475"
+    ],
     "my_branches": [
       "5fb381c8664091175a0e7b3f",
       "5fb381c8664091175a0e7b40"
@@ -16,6 +48,7 @@
   },
   {
     "_id": "5fb37ee5ce455f18ad88e8c0",
+    "accessibleBranches": [],
     "my_branches": [
       "5fb381c8664091175a0e7b41",
       "5fb381c8664091175a0e7b42"
