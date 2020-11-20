@@ -8,7 +8,7 @@ const BranchSchema = new mongoose.Schema({
   },
   notes_history: [{
     type: mongoose.Schema.Types.ObjectId,
-    ref: 'Note'
+    ref: 'Note',
   }],
   shared_users_info: [{
     type: mongoose.Schema.Types.ObjectId,
@@ -17,7 +17,7 @@ const BranchSchema = new mongoose.Schema({
   latest_note: {
     type: mongoose.Schema.Types.ObjectId,
     ref: 'Note',
-  }
+  },
 }, {
   timestamps: {
     createdAt: 'created_at',

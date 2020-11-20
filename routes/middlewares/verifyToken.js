@@ -21,6 +21,8 @@ const verifyToken = async (req, res, next) => {
       });
     }
 
+    res.locals.decodedUserId = user._id;
+
     next();
   } catch (err) {
     next(err);

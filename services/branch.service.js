@@ -5,8 +5,9 @@ class BranchService {
     try {
       return await Branch.create({
         created_by: user_id,
-        notes: [],
+        notes_history: [],
         shared_users_info: [],
+        latest_note: null,
       });
     } catch (err) {
       throw err;
@@ -20,6 +21,14 @@ class BranchService {
         branch,
         { new: true },
       );
+    } catch (err) {
+      throw err;
+    }
+  }
+
+  async getBranchByMongooseId(id) {
+    try {
+      return await Branch.findById(id);
     } catch (err) {
       throw err;
     }

@@ -2,16 +2,15 @@ const mongoose = require('mongoose');
 const User = require('../../models/User');
 const BranchService = require('../../services/branch.service');
 const UserService = require('../../services/user.service');
-const Branch = require('../../models/Branch');
-const BranchSharingInfo = require('../../models/BranchSharingInfo');
-const Note = require('../../models/Note');
 
 exports.createBranch = async (req, res, next) => {
-  const user = req.body;
   const { user_id } = req.params;
+  const userBranch = new UserService();
+  const branchService = new BranchService();
 
   try {
-    const newBranch = await new BranchService().createBranch(user_id);
+    const newBranch = await branchService.createBranch(user_id);
+    const user = await userBranch.getUserByMongooseId(user_id);
 
     user.my_branches.push(newBranch._id);
 
@@ -21,7 +20,7 @@ exports.createBranch = async (req, res, next) => {
 
     res.status(201).json({
       result: 'ok',
-      newBranch,
+      branchId: newBranch._id,
       updatedUser,
     });
   } catch (err) {
@@ -61,8 +60,8 @@ exports.getBranches = async (req, res, next) => {
           $match:
           {
             $or: [
-              { 'noteList.title': { $regex: `4`, $options: 'g' } }, //`${q}`
-              { 'noteList.content': { $regex: `2`, $options: 'g' } },//`${q}`
+              { 'noteList.title': { $regex: '4', $options: 'g' } }, //`${q}`
+              { 'noteList.content': { $regex: '2', $options: 'g' } },//`${q}`
             ]
           }
         },
@@ -109,14 +108,13 @@ exports.getBranches = async (req, res, next) => {
           $match:
           {
             $or: [
-              { 'noteList.title': { $regex: `5`, $options: 'g' } },//`${q}`
-              { 'noteList.content': { $regex: `2`, $options: 'g' } },//`${q}`
+              { 'noteList.title': { $regex: '5', $options: 'g' } },//`${q}`
+              { 'noteList.content': { $regex: '2', $options: 'g' } },//`${q}`
             ]
           }
         },
       ]);
     } else {
-
       myBranches = await User.aggregate([
         { $match: { '_id': mongoose.Types.ObjectId(userId) } },
         {

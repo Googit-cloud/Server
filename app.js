@@ -32,8 +32,6 @@ app.use((req, res, next) => {
 });
 
 app.use((err, req, res, next) => {
-  console.log(err);
-
   const message
     = err.statusCode === 404
       ? err.message
