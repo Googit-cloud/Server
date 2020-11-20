@@ -2,7 +2,7 @@ const mongoose = require('mongoose');
 
 const NoteSchema = new mongoose.Schema({
   created_by: {
-    type: mongoose.Schema.Types.ObjectId, // virtual?
+    type: mongoose.Schema.Types.ObjectId,
     ref: 'User',
   },
   parent: {

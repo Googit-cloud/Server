@@ -6,12 +6,8 @@
     "created_by": "5fb281cb21be75511fcc0e05",
     "title": "mock note 1",
     "content": "mock content 1",
-    "created_at": {
-      "$date": "2020-11-18T19:19:42.157Z"
-    },
-    "updated_at": {
-      "$date": "2020-11-18T19:19:42.157Z"
-    },
+    "created_at": "2020-11-18T19:19:42.157Z",
+    "updated_at": "2020-11-18T19:19:42.157Z",
     "__v": 0
   },
   {
@@ -21,12 +17,8 @@
     "created_by": "5fb281cb21be75511fcc0e05",
     "title": "mock note 2",
     "content": "mock content 2",
-    "created_at": {
-      "$date": "2020-11-18T19:19:42.157Z"
-    },
-    "updated_at": {
-      "$date": "2020-11-18T19:19:42.157Z"
-    },
+    "created_at": "2020-11-18T19:19:42.157Z",
+    "updated_at": "2020-11-18T19:19:42.157Z",
     "__v": 0
   },
   {
@@ -36,12 +28,8 @@
     "created_by": "5fb37ee5ce455f18ad88e8c0",
     "title": "mock note 3",
     "content": "mock content 3",
-    "created_at": {
-      "$date": "2020-11-18T19:19:42.157Z"
-    },
-    "updated_at": {
-      "$date": "2020-11-18T19:19:42.157Z"
-    },
+    "created_at": "2020-11-18T19:19:42.157Z",
+    "updated_at": "2020-11-18T19:19:42.157Z",
     "__v": 0
   },
   {
@@ -51,12 +39,8 @@
     "created_by": "5fb281cb21be75511fcc0e05",
     "title": "mock note 4",
     "content": "mock content 4",
-    "created_at": {
-      "$date": "2020-11-18T19:19:42.157Z"
-    },
-    "updated_at": {
-      "$date": "2020-11-18T19:19:42.157Z"
-    },
+    "created_at": "2020-11-18T19:19:42.157Z",
+    "updated_at": "2020-11-18T19:19:42.157Z",
     "__v": 0
   },
   {
@@ -66,12 +50,8 @@
     "created_by": "5fb37ee5ce455f18ad88e8c0",
     "title": "mock note 5",
     "content": "mock content 5",
-    "created_at": {
-      "$date": "2020-11-18T19:19:42.157Z"
-    },
-    "updated_at": {
-      "$date": "2020-11-18T19:19:42.157Z"
-    },
+    "created_at": "2020-11-18T19:19:42.157Z",
+    "updated_at": "2020-11-18T19:19:42.157Z",
     "__v": 0
   },
   {
@@ -81,12 +61,8 @@
     "created_by": "5fb281cb21be75511fcc0e05",
     "title": "mock note 6",
     "content": "mock content 6",
-    "created_at": {
-      "$date": "2020-11-18T19:19:42.157Z"
-    },
-    "updated_at": {
-      "$date": "2020-11-18T19:19:42.157Z"
-    },
+    "created_at": "2020-11-18T19:19:42.157Z",
+    "updated_at": "2020-11-18T19:19:42.157Z",
     "__v": 0
   },
   {
@@ -96,12 +72,8 @@
     "created_by": "5fb281cb21be75511fcc0e05",
     "title": "mock note 7",
     "content": "mock content 7",
-    "created_at": {
-      "$date": "2020-11-18T19:19:42.157Z"
-    },
-    "updated_at": {
-      "$date": "2020-11-18T19:19:42.157Z"
-    },
+    "created_at": "2020-11-18T19:19:42.157Z",
+    "updated_at": "2020-11-18T19:19:42.157Z",
     "__v": 0
   },
   {
@@ -111,12 +83,8 @@
     "created_by": "5fb281cb21be75511fcc0e05",
     "title": "mock note 9",
     "content": "mock content 9",
-    "created_at": {
-      "$date": "2020-11-18T19:19:42.157Z"
-    },
-    "updated_at": {
-      "$date": "2020-11-18T19:19:42.157Z"
-    },
+    "created_at": "2020-11-18T19:19:42.157Z",
+    "updated_at": "2020-11-18T19:19:42.157Z",
     "__v": 0
   },
   {
@@ -126,12 +94,8 @@
     "created_by": "5fb281cb21be75511fcc0e05",
     "title": "mock note 8",
     "content": "mock content 8",
-    "created_at": {
-      "$date": "2020-11-18T19:19:42.157Z"
-    },
-    "updated_at": {
-      "$date": "2020-11-18T19:19:42.157Z"
-    },
+    "created_at": "2020-11-18T19:19:42.157Z",
+    "updated_at": "2020-11-18T19:19:42.157Z",
     "__v": 0
   },
   {
@@ -141,12 +105,8 @@
     "created_by": "5fb281cb21be75511fcc0e05",
     "title": "mock note 10",
     "content": "mock content 10",
-    "created_at": {
-      "$date": "2020-11-18T19:19:42.157Z"
-    },
-    "updated_at": {
-      "$date": "2020-11-18T19:19:42.157Z"
-    },
+    "created_at": "2020-11-18T19:19:42.157Z",
+    "updated_at": "2020-11-18T19:19:42.157Z",
     "__v": 0
   },
   {
@@ -156,12 +116,8 @@
     "created_by": "5fb281cb21be75511fcc0e05",
     "title": "mock note 11",
     "content": "mock content 11",
-    "created_at": {
-      "$date": "2020-11-18T19:19:42.157Z"
-    },
-    "updated_at": {
-      "$date": "2020-11-18T19:19:42.157Z"
-    },
+    "created_at": "2020-11-18T19:19:42.157Z",
+    "updated_at": "2020-11-18T19:19:42.157Z",
     "__v": 0
   },
   {
@@ -171,12 +127,8 @@
     "created_by": "5fb281cb21be75511fcc0e05",
     "title": "mock note 12",
     "content": "mock content 12",
-    "created_at": {
-      "$date": "2020-11-18T19:19:42.157Z"
-    },
-    "updated_at": {
-      "$date": "2020-11-18T19:19:42.157Z"
-    },
+    "created_at": "2020-11-18T19:19:42.157Z",
+    "updated_at": "2020-11-18T19:19:42.157Z",
     "__v": 0
   },
   {
@@ -186,12 +138,8 @@
     "created_by": "5fb281cb21be75511fcc0e05",
     "title": "mock note 13",
     "content": "mock content 13",
-    "created_at": {
-      "$date": "2020-11-18T19:19:42.157Z"
-    },
-    "updated_at": {
-      "$date": "2020-11-18T19:19:42.157Z"
-    },
+    "created_at": "2020-11-18T19:19:42.157Z",
+    "updated_at": "2020-11-18T19:19:42.157Z",
     "__v": 0
   },
   {
@@ -201,12 +149,8 @@
     "created_by": "5fb281cb21be75511fcc0e05",
     "title": "mock note 15",
     "content": "mock content 15",
-    "created_at": {
-      "$date": "2020-11-18T19:19:42.157Z"
-    },
-    "updated_at": {
-      "$date": "2020-11-18T19:19:42.157Z"
-    },
+    "created_at": "2020-11-18T19:19:42.157Z",
+    "updated_at": "2020-11-18T19:19:42.157Z",
     "__v": 0
   },
   {
@@ -216,12 +160,8 @@
     "created_by": "5fb281cb21be75511fcc0e05",
     "title": "mock note 14",
     "content": "mock content 14",
-    "created_at": {
-      "$date": "2020-11-18T19:19:42.157Z"
-    },
-    "updated_at": {
-      "$date": "2020-11-18T19:19:42.157Z"
-    },
+    "created_at": "2020-11-18T19:19:42.157Z",
+    "updated_at": "2020-11-18T19:19:42.157Z",
     "__v": 0
   },
   {
@@ -231,12 +171,8 @@
     "created_by": "5fb281cb21be75511fcc0e05",
     "title": "mock note 17",
     "content": "mock content 17",
-    "created_at": {
-      "$date": "2020-11-18T19:19:42.158Z"
-    },
-    "updated_at": {
-      "$date": "2020-11-18T19:19:42.158Z"
-    },
+    "created_at": "2020-11-18T19:19:42.158Z",
+    "updated_at": "2020-11-18T19:19:42.158Z",
     "__v": 0
   },
   {
@@ -246,12 +182,8 @@
     "created_by": "5fb281cb21be75511fcc0e05",
     "title": "mock note 16",
     "content": "mock content 16",
-    "created_at": {
-      "$date": "2020-11-18T19:19:42.158Z"
-    },
-    "updated_at": {
-      "$date": "2020-11-18T19:19:42.158Z"
-    },
+    "created_at": "2020-11-18T19:19:42.158Z",
+    "updated_at": "2020-11-18T19:19:42.158Z",
     "__v": 0
   },
   {
@@ -261,12 +193,8 @@
     "created_by": "5fb281cb21be75511fcc0e05",
     "title": "mock note 18",
     "content": "mock content 18",
-    "created_at": {
-      "$date": "2020-11-18T19:19:42.158Z"
-    },
-    "updated_at": {
-      "$date": "2020-11-18T19:19:42.158Z"
-    },
+    "created_at": "2020-11-18T19:19:42.158Z",
+    "updated_at": "2020-11-18T19:19:42.158Z",
     "__v": 0
   },
   {
@@ -276,12 +204,8 @@
     "created_by": "5fb281cb21be75511fcc0e05",
     "title": "mock note 19",
     "content": "mock content 19",
-    "created_at": {
-      "$date": "2020-11-18T19:19:42.158Z"
-    },
-    "updated_at": {
-      "$date": "2020-11-18T19:19:42.158Z"
-    },
+    "created_at": "2020-11-18T19:19:42.158Z",
+    "updated_at": "2020-11-18T19:19:42.158Z",
     "__v": 0
   },
   {
@@ -291,12 +215,8 @@
     "created_by": "5fb281cb21be75511fcc0e05",
     "title": "mock note 20",
     "content": "mock content 20",
-    "created_at": {
-      "$date": "2020-11-18T19:19:42.158Z"
-    },
-    "updated_at": {
-      "$date": "2020-11-18T19:19:42.158Z"
-    },
+    "created_at": "2020-11-18T19:19:42.158Z",
+    "updated_at": "2020-11-18T19:19:42.158Z",
     "__v": 0
   },
   {
@@ -306,12 +226,8 @@
     "created_by": "5fb281cb21be75511fcc0e05",
     "title": "mock note 21",
     "content": "mock content 21",
-    "created_at": {
-      "$date": "2020-11-18T19:19:42.158Z"
-    },
-    "updated_at": {
-      "$date": "2020-11-18T19:19:42.158Z"
-    },
+    "created_at": "2020-11-18T19:19:42.158Z",
+    "updated_at": "2020-11-18T19:19:42.158Z",
     "__v": 0
   },
   {
@@ -321,12 +237,8 @@
     "created_by": "5fb281cb21be75511fcc0e05",
     "title": "mock note 22",
     "content": "mock content 22",
-    "created_at": {
-      "$date": "2020-11-18T19:19:42.158Z"
-    },
-    "updated_at": {
-      "$date": "2020-11-18T19:19:42.158Z"
-    },
+    "created_at": "2020-11-18T19:19:42.158Z",
+    "updated_at": "2020-11-18T19:19:42.158Z",
     "__v": 0
   },
   {
@@ -336,12 +248,8 @@
     "created_by": "5fb281cb21be75511fcc0e05",
     "title": "mock note 23",
     "content": "mock content 23",
-    "created_at": {
-      "$date": "2020-11-18T19:19:42.158Z"
-    },
-    "updated_at": {
-      "$date": "2020-11-18T19:19:42.158Z"
-    },
+    "created_at": "2020-11-18T19:19:42.158Z",
+    "updated_at": "2020-11-18T19:19:42.158Z",
     "__v": 0
   },
   {
@@ -351,12 +259,8 @@
     "created_by": "5fb281cb21be75511fcc0e05",
     "title": "mock note 24",
     "content": "mock content 24",
-    "created_at": {
-      "$date": "2020-11-18T19:19:42.158Z"
-    },
-    "updated_at": {
-      "$date": "2020-11-18T19:19:42.158Z"
-    },
+    "created_at": "2020-11-18T19:19:42.158Z",
+    "updated_at": "2020-11-18T19:19:42.158Z",
     "__v": 0
   },
   {
@@ -366,12 +270,8 @@
     "created_by": "5fb281cb21be75511fcc0e05",
     "title": "mock note 26",
     "content": "mock content 26",
-    "created_at": {
-      "$date": "2020-11-18T19:19:42.158Z"
-    },
-    "updated_at": {
-      "$date": "2020-11-18T19:19:42.158Z"
-    },
+    "created_at": "2020-11-18T19:19:42.158Z",
+    "updated_at": "2020-11-18T19:19:42.158Z",
     "__v": 0
   },
   {
@@ -381,12 +281,8 @@
     "created_by": "5fb281cb21be75511fcc0e05",
     "title": "mock note 27",
     "content": "mock content 27",
-    "created_at": {
-      "$date": "2020-11-18T19:19:42.158Z"
-    },
-    "updated_at": {
-      "$date": "2020-11-18T19:19:42.158Z"
-    },
+    "created_at": "2020-11-18T19:19:42.158Z",
+    "updated_at": "2020-11-18T19:19:42.158Z",
     "__v": 0
   },
   {
@@ -396,12 +292,8 @@
     "created_by": "5fb281cb21be75511fcc0e05",
     "title": "mock note 25",
     "content": "mock content 25",
-    "created_at": {
-      "$date": "2020-11-18T19:19:42.158Z"
-    },
-    "updated_at": {
-      "$date": "2020-11-18T19:19:42.158Z"
-    },
+    "created_at": "2020-11-18T19:19:42.158Z",
+    "updated_at": "2020-11-18T19:19:42.158Z",
     "__v": 0
   },
   {
@@ -411,12 +303,8 @@
     "created_by": "5fb281cb21be75511fcc0e05",
     "title": "mock note 28",
     "content": "mock content 28",
-    "created_at": {
-      "$date": "2020-11-18T19:19:42.158Z"
-    },
-    "updated_at": {
-      "$date": "2020-11-18T19:19:42.158Z"
-    },
+    "created_at": "2020-11-18T19:19:42.158Z",
+    "updated_at": "2020-11-18T19:19:42.158Z",
     "__v": 0
   },
   {
@@ -426,12 +314,8 @@
     "created_by": "5fb281cb21be75511fcc0e05",
     "title": "mock note 29",
     "content": "mock content 29",
-    "created_at": {
-      "$date": "2020-11-18T19:19:42.158Z"
-    },
-    "updated_at": {
-      "$date": "2020-11-18T19:19:42.158Z"
-    },
+    "created_at": "2020-11-18T19:19:42.158Z",
+    "updated_at": "2020-11-18T19:19:42.158Z",
     "__v": 0
   },
   {
@@ -441,12 +325,8 @@
     "created_by": "5fb281cb21be75511fcc0e05",
     "title": "mock note 30",
     "content": "mock content 30",
-    "created_at": {
-      "$date": "2020-11-18T19:19:42.158Z"
-    },
-    "updated_at": {
-      "$date": "2020-11-18T19:19:42.158Z"
-    },
+    "created_at": "2020-11-18T19:19:42.158Z",
+    "updated_at": "2020-11-18T19:19:42.158Z",
     "__v": 0
   },
   {
@@ -456,12 +336,516 @@
     "created_by": "5fb281cb21be75511fcc0e05",
     "title": "mock note 31",
     "content": "mock content 31",
-    "created_at": {
-      "$date": "2020-11-18T19:19:42.158Z"
-    },
-    "updated_at": {
-      "$date": "2020-11-18T19:19:42.158Z"
-    },
+    "created_at": "2020-11-18T19:19:42.158Z",
+    "updated_at": "2020-11-18T19:19:42.158Z",
     "__v": 0
   }
 ]
+
+{
+  //     "_id": {
+  //       "$oid": "5fb57700f33a4f48fa82c45f"
+  //     },
+  //     "notes": [
+  //       {
+  //         "$oid": "5fb573ce01ad584833920847"
+  //       }
+  //     ],
+  //     "latestNote": "5fb573ce01ad584833920847",
+  //     "shared_users_info": [],
+  //     "created_by": {
+  //       "$oid": "5fb281cb21be75511fcc0e05"
+  //     },
+  //     "created_at": {
+  //       "$date": "2020-11-18T19:33:20.955Z"
+  //     },
+  //     "updated_at": {
+  //       "$date": "2020-11-18T19:33:20.955Z"
+  //     },
+  //     "__v": 0
+  //   },
+  //   {
+  //     "_id": {
+  //       "$oid": "5fb57700f33a4f48fa82c460"
+  //     },
+  //     "notes": [
+  //       {
+  //         "$oid": "5fb573ce01ad584833920849"
+  //       }
+  //     ],
+  //     "latestNote": "5fb573ce01ad584833920849",
+  //     "shared_users_info": [],
+  //     "created_by": {
+  //       "$oid": "5fb281cb21be75511fcc0e05"
+  //     },
+  //     "created_at": {
+  //       "$date": "2020-11-18T19:33:20.955Z"
+  //     },
+  //     "updated_at": {
+  //       "$date": "2020-11-18T19:33:20.955Z"
+  //     },
+  //     "__v": 0
+  //   },
+  //   {
+  //     "_id": {
+  //       "$oid": "5fb57700f33a4f48fa82c461"
+  //     },
+  //     "notes": [
+  //       {
+  //         "$oid": "5fb573ce01ad58483392084a"
+  //       }
+  //     ],
+  //     "latestNote": "5fb573ce01ad58483392084a",
+  //     "shared_users_info": [],
+  //     "created_by": {
+  //       "$oid": "5fb281cb21be75511fcc0e05"
+  //     },
+  //     "created_at": {
+  //       "$date": "2020-11-18T19:33:20.955Z"
+  //     },
+  //     "updated_at": {
+  //       "$date": "2020-11-18T19:33:20.955Z"
+  //     },
+  //     "__v": 0
+  //   },
+  //   {
+  //     "_id": {
+  //       "$oid": "5fb57700f33a4f48fa82c462"
+  //     },
+  //     "notes": [
+  //       {
+  //         "$oid": "5fb573ce01ad58483392084b"
+  //       }
+  //     ],
+  //     "latestNote": "5fb573ce01ad58483392084b",
+  //     "shared_users_info": [],
+  //     "created_by": {
+  //       "$oid": "5fb281cb21be75511fcc0e05"
+  //     },
+  //     "created_at": {
+  //       "$date": "2020-11-18T19:33:20.955Z"
+  //     },
+  //     "updated_at": {
+  //       "$date": "2020-11-18T19:33:20.955Z"
+  //     },
+  //     "__v": 0
+  //   },
+  //   {
+  //     "_id": {
+  //       "$oid": "5fb57700f33a4f48fa82c463"
+  //     },
+  //     "notes": [
+  //       {
+  //         "$oid": "5fb573ce01ad58483392084c"
+  //       }
+  //     ],
+  //     "latestNote": "5fb573ce01ad58483392084c",
+  //     "shared_users_info": [],
+  //     "created_by": {
+  //       "$oid": "5fb281cb21be75511fcc0e05"
+  //     },
+  //     "created_at": {
+  //       "$date": "2020-11-18T19:33:20.955Z"
+  //     },
+  //     "updated_at": {
+  //       "$date": "2020-11-18T19:33:20.955Z"
+  //     },
+  //     "__v": 0
+  //   },
+  //   {
+  //     "_id": {
+  //       "$oid": "5fb57700f33a4f48fa82c464"
+  //     },
+  //     "notes": [
+  //       {
+  //         "$oid": "5fb573ce01ad58483392084e"
+  //       }
+  //     ],
+  //     "latestNote": "5fb573ce01ad58483392084e",
+  //     "shared_users_info": [],
+  //     "created_by": {
+  //       "$oid": "5fb281cb21be75511fcc0e05"
+  //     },
+  //     "created_at": {
+  //       "$date": "2020-11-18T19:33:20.955Z"
+  //     },
+  //     "updated_at": {
+  //       "$date": "2020-11-18T19:33:20.955Z"
+  //     },
+  //     "__v": 0
+  //   },
+  //   {
+  //     "_id": {
+  //       "$oid": "5fb57700f33a4f48fa82c465"
+  //     },
+  //     "notes": [
+  //       {
+  //         "$oid": "5fb573ce01ad58483392084d"
+  //       }
+  //     ],
+  //     "latestNote": "5fb573ce01ad58483392084d",
+  //     "shared_users_info": [],
+  //     "created_by": {
+  //       "$oid": "5fb281cb21be75511fcc0e05"
+  //     },
+  //     "created_at": {
+  //       "$date": "2020-11-18T19:33:20.955Z"
+  //     },
+  //     "updated_at": {
+  //       "$date": "2020-11-18T19:33:20.955Z"
+  //     },
+  //     "__v": 0
+  //   },
+  //   {
+  //     "_id": {
+  //       "$oid": "5fb57700f33a4f48fa82c466"
+  //     },
+  //     "notes": [
+  //       {
+  //         "$oid": "5fb573ce01ad584833920850"
+  //       }
+  //     ],
+  //     "latestNote": "5fb573ce01ad584833920850",
+  //     "shared_users_info": [],
+  //     "created_by": {
+  //       "$oid": "5fb281cb21be75511fcc0e05"
+  //     },
+  //     "created_at": {
+  //       "$date": "2020-11-18T19:33:20.955Z"
+  //     },
+  //     "updated_at": {
+  //       "$date": "2020-11-18T19:33:20.955Z"
+  //     },
+  //     "__v": 0
+  //   },
+  //   {
+  //     "_id": {
+  //       "$oid": "5fb57700f33a4f48fa82c467"
+  //     },
+  //     "notes": [
+  //       {
+  //         "$oid": "5fb573ce01ad58483392084f"
+  //       }
+  //     ],
+  //     "latestNote": "5fb573ce01ad58483392084f",
+  //     "shared_users_info": [],
+  //     "created_by": {
+  //       "$oid": "5fb281cb21be75511fcc0e05"
+  //     },
+  //     "created_at": {
+  //       "$date": "2020-11-18T19:33:20.955Z"
+  //     },
+  //     "updated_at": {
+  //       "$date": "2020-11-18T19:33:20.955Z"
+  //     },
+  //     "__v": 0
+  //   },
+  //   {
+  //     "_id": {
+  //       "$oid": "5fb57700f33a4f48fa82c468"
+  //     },
+  //     "notes": [
+  //       {
+  //         "$oid": "5fb573ce01ad584833920851"
+  //       }
+  //     ],
+  //     "latestNote": "5fb573ce01ad584833920851",
+  //     "shared_users_info": [],
+  //     "created_by": {
+  //       "$oid": "5fb281cb21be75511fcc0e05"
+  //     },
+  //     "created_at": {
+  //       "$date": "2020-11-18T19:33:20.955Z"
+  //     },
+  //     "updated_at": {
+  //       "$date": "2020-11-18T19:33:20.955Z"
+  //     },
+  //     "__v": 0
+  //   },
+  //   {
+  //     "_id": {
+  //       "$oid": "5fb57700f33a4f48fa82c469"
+  //     },
+  //     "notes": [
+  //       {
+  //         "$oid": "5fb573ce01ad584833920852"
+  //       }
+  //     ],
+  //     "latestNote": "5fb573ce01ad584833920852",
+  //     "shared_users_info": [],
+  //     "created_by": {
+  //       "$oid": "5fb281cb21be75511fcc0e05"
+  //     },
+  //     "created_at": {
+  //       "$date": "2020-11-18T19:33:20.955Z"
+  //     },
+  //     "updated_at": {
+  //       "$date": "2020-11-18T19:33:20.955Z"
+  //     },
+  //     "__v": 0
+  //   },
+  //   {
+  //     "_id": {
+  //       "$oid": "5fb57700f33a4f48fa82c46a"
+  //     },
+  //     "notes": [
+  //       {
+  //         "$oid": "5fb573ce01ad584833920853"
+  //       }
+  //     ],
+  //     "latestNote": "5fb573ce01ad584833920853",
+  //     "shared_users_info": [],
+  //     "created_by": {
+  //       "$oid": "5fb281cb21be75511fcc0e05"
+  //     },
+  //     "created_at": {
+  //       "$date": "2020-11-18T19:33:20.955Z"
+  //     },
+  //     "updated_at": {
+  //       "$date": "2020-11-18T19:33:20.955Z"
+  //     },
+  //     "__v": 0
+  //   },
+  //   {
+  //     "_id": {
+  //       "$oid": "5fb57700f33a4f48fa82c46b"
+  //     },
+  //     "notes": [
+  //       {
+  //         "$oid": "5fb573ce01ad584833920854"
+  //       }
+  //     ],
+  //     "latestNote": "5fb573ce01ad584833920854",
+  //     "shared_users_info": [],
+  //     "created_by": {
+  //       "$oid": "5fb281cb21be75511fcc0e05"
+  //     },
+  //     "created_at": {
+  //       "$date": "2020-11-18T19:33:20.955Z"
+  //     },
+  //     "updated_at": {
+  //       "$date": "2020-11-18T19:33:20.955Z"
+  //     },
+  //     "__v": 0
+  //   },
+  //   {
+  //     "_id": {
+  //       "$oid": "5fb57700f33a4f48fa82c46d"
+  //     },
+  //     "notes": [
+  //       {
+  //         "$oid": "5fb573ce01ad584833920856"
+  //       }
+  //     ],
+  //     "latestNote": "5fb573ce01ad584833920856",
+  //     "shared_users_info": [],
+  //     "created_by": {
+  //       "$oid": "5fb281cb21be75511fcc0e05"
+  //     },
+  //     "created_at": {
+  //       "$date": "2020-11-18T19:33:20.955Z"
+  //     },
+  //     "updated_at": {
+  //       "$date": "2020-11-18T19:33:20.955Z"
+  //     },
+  //     "__v": 0
+  //   },
+  //   {
+  //     "_id": {
+  //       "$oid": "5fb57700f33a4f48fa82c46c"
+  //     },
+  //     "notes": [
+  //       {
+  //         "$oid": "5fb573ce01ad584833920855"
+  //       }
+  //     ],
+  //     "latestNote": "5fb573ce01ad584833920855",
+  //     "shared_users_info": [],
+  //     "created_by": {
+  //       "$oid": "5fb281cb21be75511fcc0e05"
+  //     },
+  //     "created_at": {
+  //       "$date": "2020-11-18T19:33:20.955Z"
+  //     },
+  //     "updated_at": {
+  //       "$date": "2020-11-18T19:33:20.955Z"
+  //     },
+  //     "__v": 0
+  //   },
+  //   {
+  //     "_id": {
+  //       "$oid": "5fb57700f33a4f48fa82c46e"
+  //     },
+  //     "notes": [
+  //       {
+  //         "$oid": "5fb573ce01ad584833920857"
+  //       }
+  //     ],
+  //     "latestNote": "5fb573ce01ad584833920857",
+  //     "shared_users_info": [],
+  //     "created_by": {
+  //       "$oid": "5fb281cb21be75511fcc0e05"
+  //     },
+  //     "created_at": {
+  //       "$date": "2020-11-18T19:33:20.955Z"
+  //     },
+  //     "updated_at": {
+  //       "$date": "2020-11-18T19:33:20.955Z"
+  //     },
+  //     "__v": 0
+  //   },
+  //   {
+  //     "_id": {
+  //       "$oid": "5fb57700f33a4f48fa82c470"
+  //     },
+  //     "notes": [
+  //       {
+  //         "$oid": "5fb573ce01ad58483392085a"
+  //       }
+  //     ],
+  //     "latestNote": "5fb573ce01ad58483392085a",
+  //     "shared_users_info": [],
+  //     "created_by": {
+  //       "$oid": "5fb281cb21be75511fcc0e05"
+  //     },
+  //     "created_at": {
+  //       "$date": "2020-11-18T19:33:20.955Z"
+  //     },
+  //     "updated_at": {
+  //       "$date": "2020-11-18T19:33:20.955Z"
+  //     },
+  //     "__v": 0
+  //   },
+  //   {
+  //     "_id": {
+  //       "$oid": "5fb57700f33a4f48fa82c471"
+  //     },
+  //     "notes": [
+  //       {
+  //         "$oid": "5fb573ce01ad584833920858"
+  //       }
+  //     ],
+  //     "latestNote": "5fb573ce01ad584833920858",
+  //     "shared_users_info": [],
+  //     "created_by": {
+  //       "$oid": "5fb281cb21be75511fcc0e05"
+  //     },
+  //     "created_at": {
+  //       "$date": "2020-11-18T19:33:20.955Z"
+  //     },
+  //     "updated_at": {
+  //       "$date": "2020-11-18T19:33:20.955Z"
+  //     },
+  //     "__v": 0
+  //   },
+  //   {
+  //     "_id": {
+  //       "$oid": "5fb57700f33a4f48fa82c46f"
+  //     },
+  //     "notes": [
+  //       {
+  //         "$oid": "5fb573ce01ad584833920859"
+  //       }
+  //     ],
+  //     "latestNote": "5fb573ce01ad584833920859",
+  //     "shared_users_info": [],
+  //     "created_by": {
+  //       "$oid": "5fb281cb21be75511fcc0e05"
+  //     },
+  //     "created_at": {
+  //       "$date": "2020-11-18T19:33:20.955Z"
+  //     },
+  //     "updated_at": {
+  //       "$date": "2020-11-18T19:33:20.955Z"
+  //     },
+  //     "__v": 0
+  //   },
+  //   {
+  //     "_id": {
+  //       "$oid": "5fb57700f33a4f48fa82c472"
+  //     },
+  //     "notes": [
+  //       {
+  //         "$oid": "5fb573ce01ad58483392085b"
+  //       }
+  //     ],
+  //     "latestNote": "5fb573ce01ad58483392085b",
+  //     "shared_users_info": [],
+  //     "created_by": {
+  //       "$oid": "5fb281cb21be75511fcc0e05"
+  //     },
+  //     "created_at": {
+  //       "$date": "2020-11-18T19:33:20.955Z"
+  //     },
+  //     "updated_at": {
+  //       "$date": "2020-11-18T19:33:20.955Z"
+  //     },
+  //     "__v": 0
+  //   },
+  //   {
+  //     "_id": {
+  //       "$oid": "5fb57700f33a4f48fa82c473"
+  //     },
+  //     "notes": [
+  //       {
+  //         "$oid": "5fb573ce01ad58483392085c"
+  //       }
+  //     ],
+  //     "latestNote": "5fb573ce01ad58483392085c",
+  //     "shared_users_info": [],
+  //     "created_by": {
+  //       "$oid": "5fb281cb21be75511fcc0e05"
+  //     },
+  //     "created_at": {
+  //       "$date": "2020-11-18T19:33:20.955Z"
+  //     },
+  //     "updated_at": {
+  //       "$date": "2020-11-18T19:33:20.955Z"
+  //     },
+  //     "__v": 0
+  //   },
+  //   {
+  //     "_id": {
+  //       "$oid": "5fb57700f33a4f48fa82c474"
+  //     },
+  //     "notes": [
+  //       {
+  //         "$oid": "5fb573ce01ad58483392085d"
+  //       }
+  //     ],
+  //     "latestNote": "5fb573ce01ad58483392085d",
+  //     "shared_users_info": [],
+  //     "created_by": {
+  //       "$oid": "5fb281cb21be75511fcc0e05"
+  //     },
+  //     "created_at": {
+  //       "$date": "2020-11-18T19:33:20.955Z"
+  //     },
+  //     "updated_at": {
+  //       "$date": "2020-11-18T19:33:20.955Z"
+  //     },
+  //     "__v": 0
+  //   },
+  //   {
+  //     "_id": {
+  //       "$oid": "5fb57700f33a4f48fa82c475"
+  //     },
+  //     "notes": [
+  //       {
+  //         "$oid": "5fb573ce01ad58483392085e"
+  //       }
+  //     ],
+  //     "latestNote": "5fb573ce01ad58483392085e",
+  //     "shared_users_info": [],
+  //     "created_by": {
+  //       "$oid": "5fb281cb21be75511fcc0e05"
+  //     },
+  //     "created_at": {
+  //       "$date": "2020-11-18T19:33:20.955Z"
+  //     },
+  //     "updated_at": {
+  //       "$date": "2020-11-18T19:33:20.955Z"
+  //     },
+  //     "__v": 0
+  //   }
+  // ]
