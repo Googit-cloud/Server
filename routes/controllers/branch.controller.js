@@ -3,6 +3,11 @@ const User = require('../../models/User');
 const BranchService = require('../../services/branch.service');
 const UserService = require('../../services/user.service');
 
+const BranchSharingInfoService = require('../../services/branch.SharingInfo');
+const Branch = require('../../models/Branch');
+const BranchSharingInfo = require('../../models/BranchSharingInfo');
+const Note = require('../../models/Note');
+
 exports.createBranch = async (req, res, next) => {
   const { user_id } = req.params;
   const userBranch = new UserService();
@@ -192,4 +197,32 @@ exports.getBranches = async (req, res, next) => {
   } catch (err) {
     next(err);
   }
+};
+
+exports.createBranchSharingInfo = async function (req, res, next) {
+  console.log(req.params, 'hi');
+  try {
+    // const { email, auth } = req.body.sharingInfo;
+    const branchId = req.params.branch_id;
+    const auth = req.body.sharingInfo.auth;
+    const email = 'xiaoli150510@gmail.com';
+    const hasPermission = (auth === 'write');
+    const user = await new UserService().getUserByEmail(email);
+
+    const validation = await new BranchSharingInfoService().validateDuplication(branchId, user._id);
+
+    const branchSharingInfo = await BranchSharingInfo.create({
+      'user_id': user._id,
+      'branch_id': branchId,
+      'has_writing_permission': hasPermission
+    });
+
+    user.shared_branches_info.push(branchSharingInfo._id);
+    await user.save();
+
+    // console.log(branchSharingInfo, 'info');
+  } catch (err) {
+    next(err);
+  }
+
 };
