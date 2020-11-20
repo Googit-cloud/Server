@@ -5,24 +5,44 @@ exports.createNote = async (req, res, next) => {
   const { title, content } = req.body;
   const { user_id, branch_id } = req.params;
   const branchService = new BranchService();
+  const noteService = new NoteService();
 
   try {
     const newNote
-      = await new NoteService().createNote(
+      = await noteService.createNote(
         user_id,
         branch_id,
         title,
         content,
       );
-
+    const newNoteId = newNote._id;
     const branch
-      = branchService.getBranchByMongooseId(branch_id);
+      = await branchService.getBranchByMongooseId(branch_id);
 
     if (branch.latest_note) {
-      branch.notes_history.push(branch.latest_note);
+      const previousLatestNoteId = branch.latest_note;
+
+      branch.notes_history.push(previousLatestNoteId);
+
+      const previousLatestNote
+        = await noteService.getNoteByMongooseId(previousLatestNoteId);
+
+      previousLatestNote.next_version = newNoteId;
+
+      await noteService.getNoteByMongooseIdAndUpdate(
+        previousLatestNoteId,
+        previousLatestNote,
+      );
+
+      newNote.previous_version = previousLatestNoteId;
+
+      await noteService.getNoteByMongooseIdAndUpdate(
+        newNoteId,
+        newNote
+      );
     }
 
-    branch.latest_note = newNote._id;
+    branch.latest_note = newNoteId;
 
     await branchService
       .getBranchByMongooseIdAndUpdate(branch_id, branch);

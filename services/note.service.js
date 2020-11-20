@@ -14,6 +14,26 @@ class NoteService {
       throw err;
     }
   }
+
+  async getNoteByMongooseId(id) {
+    try {
+      return await Note.findById(id);
+    } catch (err) {
+      throw err;
+    }
+  }
+
+  async getNoteByMongooseIdAndUpdate(id, note) {
+    try {
+      return await Note.findByIdAndUpdate(
+        id,
+        note,
+        { new: true }
+      );
+    } catch (err) {
+      throw err;
+    }
+  }
 }
 
 module.exports = NoteService;
