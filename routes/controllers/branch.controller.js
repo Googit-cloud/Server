@@ -199,7 +199,7 @@ exports.getBranches = async (req, res, next) => {
   }
 };
 
-exports.createBranchSharingInfo = async function (req, res, next) {
+exports.createBranchSharingInfo = async function(req, res, next) {
   console.log(req.params, 'hi');
   try {
     // const { email, auth } = req.body.sharingInfo;
