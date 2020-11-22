@@ -41,3 +41,7 @@ exports.getUser = async (req, res, next) => {
   }
 
 };
+
+exports.getSharedUser = async (req, res, next) => {
+
+};

@@ -2,6 +2,7 @@ const NoteService = require('../../services/note.service');
 const BranchService = require('../../services/branch.service');
 
 exports.createNote = async (req, res, next) => {
+  console.log('createNote')
   const blocks = req.body;
   const { user_id, branch_id } = req.params;
   const branchService = new BranchService();
@@ -14,7 +15,7 @@ exports.createNote = async (req, res, next) => {
         branch_id,
         blocks
       );
-    console.log(newNote);
+    // console.log(newNote);
     const newNoteId = newNote._id;
     const branch
       = await branchService.getBranchByMongooseId(branch_id);

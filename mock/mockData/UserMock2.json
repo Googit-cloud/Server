@@ -1,12 +1,31 @@
 [
   {
-    "_id": "5fb281cb21be75511fcc0e05",
+    "_id": "5fb8f61846a1aa02b8605402",
     "my_branches": [
-      "5fb381c8664091175a0e7b3f",
-      "5fb381c8664091175a0e7b40"
+      "5fba4f0037800146e835ebe8",
+      "5fba4f0037800146e835ebe9",
+      "5fba4f0037800146e835ebea",
+      "5fba4f0037800146e835ebeb",
+      "5fba4f0037800146e835ebec",
+      "5fba4f0037800146e835ebed",
+      "5fba4f0037800146e835ebee",
+      "5fba4f0037800146e835ebf1",
+      "5fba4f0037800146e835ebef",
+      "5fba4f0037800146e835ebf0",
+      "5fba4f0037800146e835ebf2",
+      "5fba4f0037800146e835ebf3",
+      "5fba4f0037800146e835ebf4",
+      "5fba4f0037800146e835ebf5",
+      "5fba4f0037800146e835ebf6",
+      "5fba4f0037800146e835ebf7",
+      "5fba4f0037800146e835ebf8",
+      "5fba4f0037800146e835ebf9",
+      "5fba4f0037800146e835ebfa",
+      "5fba4f0037800146e835ebfb",
+      "5fba4f0037800146e835ebfc"
     ],
     "shared_branches_info": [
-      "5fb38ea10ccfbb1ee4f5a374"
+
     ],
     "uid": "yY6NgcYbtKMBjOgmSB6HM1F53fN2",
     "email": "myunghan2005@gmail.com",
@@ -15,14 +34,11 @@
     "__v": 0
   },
   {
-    "_id": "5fb37ee5ce455f18ad88e8c0",
+    "_id": "5fba10926211fd1076eeca43",
     "accessibleBranches": [],
     "my_branches": [
-      "5fb381c8664091175a0e7b41",
-      "5fb381c8664091175a0e7b42"
     ],
     "shared_branches_info": [
-      "5fb38ea10ccfbb1ee4f5a375"
     ],
     "uid": "cT212PW3XvYAqP7PFtn9PiF0iIP2",
     "email": "xiaoli150510@gmail.com",

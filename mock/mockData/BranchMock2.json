@@ -1,87 +1,190 @@
-[
-  {
-    "_id": "5fb381c8664091175a0e7b3f",
-    "latestNote": "5fb380f9664091175a0e7b3b",
-    "notes": [
-      "5fb380f9664091175a0e7b3a",
-      "5fb380f9664091175a0e7b3b"
-    ],
-    "shared_users_info": [
-      "5fb37ee5ce455f18ad88e8c0"
-    ],
-    "created_by": "5fb281cb21be75511fcc0e05",
-    "created_at": "2020-11-18T19:33:20.954Z",
-    "updated_at": "2020-11-18T19:33:20.954Z",
-    "__v": 0
-  },
-  {
-    "_id": "5fb381c8664091175a0e7b40",
-    "notes": [
-      "5fb380f9664091175a0e7b3d"
-    ],
-    "latestNote": "5fb380f9664091175a0e7b3d",
-    "shared_users_info": [],
-    "created_by": "5fb281cb21be75511fcc0e05",
-    "created_at": "2020-11-18T19:33:20.954Z",
-    "updated_at": "2020-11-18T19:33:20.954Z",
-    "__v": 0
-  },
-  {
-    "_id": "5fb381c8664091175a0e7b41",
-    "notes": [
-      "5fb380f9664091175a0e7b3c"
-    ],
-    "latestNote": "5fb380f9664091175a0e7b3c",
-    "shared_users_info": [],
-    "created_by": "5fb37ee5ce455f18ad88e8c0",
-    "created_at": "2020-11-18T19:33:20.954Z",
-    "updated_at": "2020-11-18T19:33:20.954Z",
-    "__v": 0
-  },
-  {
-    "_id": "5fb381c8664091175a0e7b42",
-    "notes": [
-      "5fb380f9664091175a0e7b3e"
-    ],
-    "latestNote": "5fb380f9664091175a0e7b3e",
-    "shared_users_info": [
-      "5fb281cb21be75511fcc0e05"
-    ],
-    "created_by": "5fb37ee5ce455f18ad88e8c0",
-    "created_at": "2020-11-18T19:33:20.954Z",
-    "updated_at": "2020-11-18T19:33:20.954Z",
-    "__v": 0
-  },
-  {
-    "_id": "5fb57700f33a4f48fa82c45c",
-    "notes": [
-      "5fb573ce01ad584833920845"
-    ],
-    "latestNote": "5fb573ce01ad584833920845",
-    "shared_users_info": [],
-    "created_by": "5fb281cb21be75511fcc0e05",
-    "created_at": "2020-11-18T19:33:20.954Z",
-    "updated_at": "2020-11-18T19:33:20.954Z",
-    "__v": 0
-  },
-  {
-    "_id": "5fb57700f33a4f48fa82c45d",
-    "notes": "5fb573ce01ad584833920846",
-    "latestNote": "5fb573ce01ad584833920846",
-    "shared_users_info": [],
-    "created_by": "5fb281cb21be75511fcc0e05",
-    "created_at": "2020-11-18T19:33:20.955Z",
-    "updated_at": "2020-11-18T19:33:20.955Z",
-    "__v": 0
-  },
-  {
-    "_id": "5fb57700f33a4f48fa82c45e",
-    "notes": "5fb573ce01ad584833920848",
-    "latestNote": "5fb573ce01ad584833920848",
-    "shared_users_info": [],
-    "created_by": "5fb281cb21be75511fcc0e05",
-    "created_at": "2020-11-18T19:33:20.955Z",
-    "updated_at": "2020-11-18T19:33:20.955Z",
-    "__v": 0
-  }
-]
+[{
+  "_id": "5fba4f0037800146e835ebe8",
+  "notes_history": [],
+  "shared_users_info": [],
+  "latest_note": "5fb380f9664091175a0e7b3a",
+  "created_by": "5fb8f61846a1aa02b8605402",
+  "created_at": "2020-11-18T19:33:20.954Z",
+  "updated_at": "2020-11-18T19:33:20.954Z",
+  "__v": 0
+},{
+  "_id": "5fba4f0037800146e835ebe9",
+  "notes_history": [],
+  "shared_users_info": [],
+  "latest_note": "5fb380f9664091175a0e7b3b",
+  "created_by": "5fb8f61846a1aa02b8605402",
+  "created_at": "2020-11-18T19:33:20.954Z",
+  "updated_at": "2020-11-18T19:33:20.954Z",
+  "__v": 0
+},{
+  "_id": "5fba4f0037800146e835ebea",
+  "notes_history": [],
+  "shared_users_info": [],
+  "latest_note": "5fb380f9664091175a0e7b3c",
+  "created_by": "5fb8f61846a1aa02b8605402",
+  "created_at": "2020-11-18T19:33:20.954Z",
+  "updated_at": "2020-11-18T19:33:20.954Z",
+  "__v": 0
+},{
+  "_id": "5fba4f0037800146e835ebeb",
+  "notes_history": [],
+  "shared_users_info": [],
+  "latest_note": "5fb380f9664091175a0e7b3d",
+  "created_by": "5fb8f61846a1aa02b8605402",
+  "created_at": "2020-11-18T19:33:20.954Z",
+  "updated_at": "2020-11-18T19:33:20.954Z",
+  "__v": 0
+},{
+  "_id": "5fba4f0037800146e835ebec",
+  "notes_history": [],
+  "shared_users_info": [],
+  "latest_note": "5fb380f9664091175a0e7b3e",
+  "created_by": "5fb8f61846a1aa02b8605402",
+  "created_at": "2020-11-18T19:33:20.954Z",
+  "updated_at": "2020-11-18T19:33:20.954Z",
+  "__v": 0
+},{
+  "_id": "5fba4f0037800146e835ebed",
+  "notes_history": [],
+  "shared_users_info": [],
+  "latest_note": "5fb573ce01ad584833920845",
+  "created_by": "5fb8f61846a1aa02b8605402",
+  "created_at": "2020-11-18T19:33:20.954Z",
+  "updated_at": "2020-11-18T19:33:20.954Z",
+  "__v": 0
+},{
+  "_id": "5fba4f0037800146e835ebee",
+  "notes_history": [],
+  "shared_users_info": [],
+  "latest_note": "5fb573ce01ad584833920846",
+  "created_by": "5fb8f61846a1aa02b8605402",
+  "created_at": "2020-11-18T19:33:20.954Z",
+  "updated_at": "2020-11-18T19:33:20.954Z",
+  "__v": 0
+},{
+  "_id": "5fba4f0037800146e835ebf1",
+  "notes_history": [],
+  "shared_users_info": [],
+  "latest_note": "5fb573ce01ad584833920849",
+  "created_by": "5fb8f61846a1aa02b8605402",
+  "created_at": "2020-11-18T19:33:20.954Z",
+  "updated_at": "2020-11-18T19:33:20.954Z",
+  "__v": 0
+},{
+  "_id": "5fba4f0037800146e835ebef",
+  "notes_history": [],
+  "shared_users_info": [],
+  "latest_note": "5fb573ce01ad584833920848",
+  "created_by": "5fb8f61846a1aa02b8605402",
+  "created_at": "2020-11-18T19:33:20.954Z",
+  "updated_at": "2020-11-18T19:33:20.954Z",
+  "__v": 0
+},{
+  "_id": "5fba4f0037800146e835ebf0",
+  "notes_history": [],
+  "shared_users_info": [],
+  "latest_note": "5fb573ce01ad584833920847",
+  "created_by": "5fb8f61846a1aa02b8605402",
+  "created_at": "2020-11-18T19:33:20.954Z",
+  "updated_at": "2020-11-18T19:33:20.954Z",
+  "__v": 0
+},{
+  "_id": "5fba4f0037800146e835ebf2",
+  "notes_history": [],
+  "shared_users_info": [],
+  "latest_note": "5fb573ce01ad58483392084a",
+  "created_by": "5fb8f61846a1aa02b8605402",
+  "created_at": "2020-11-18T19:33:20.954Z",
+  "updated_at": "2020-11-18T19:33:20.954Z",
+  "__v": 0
+},{
+  "_id": "5fba4f0037800146e835ebf3",
+  "notes_history": [],
+  "shared_users_info": [],
+  "latest_note": "5fb573ce01ad58483392084b",
+  "created_by": "5fb8f61846a1aa02b8605402",
+  "created_at": "2020-11-18T19:33:20.954Z",
+  "updated_at": "2020-11-18T19:33:20.954Z",
+  "__v": 0
+},{
+  "_id": "5fba4f0037800146e835ebf4",
+  "notes_history": [],
+  "shared_users_info": [],
+  "latest_note": "5fb573ce01ad58483392084c",
+  "created_by": "5fb8f61846a1aa02b8605402",
+  "created_at": "2020-11-18T19:33:20.954Z",
+  "updated_at": "2020-11-18T19:33:20.954Z",
+  "__v": 0
+},{
+  "_id": "5fba4f0037800146e835ebf5",
+  "notes_history": [],
+  "shared_users_info": [],
+  "latest_note": "5fb573ce01ad58483392084e",
+  "created_by": "5fb8f61846a1aa02b8605402",
+  "created_at": "2020-11-18T19:33:20.954Z",
+  "updated_at": "2020-11-18T19:33:20.954Z",
+  "__v": 0
+},{
+  "_id": "5fba4f0037800146e835ebf6",
+  "notes_history": [],
+  "shared_users_info": [],
+  "latest_note": "5fb573ce01ad58483392084d",
+  "created_by": "5fb8f61846a1aa02b8605402",
+  "created_at": "2020-11-18T19:33:20.954Z",
+  "updated_at": "2020-11-18T19:33:20.954Z",
+  "__v": 0
+},{
+  "_id": "5fba4f0037800146e835ebf7",
+  "notes_history": [],
+  "shared_users_info": [],
+  "latest_note": "5fb573ce01ad584833920850",
+  "created_by": "5fb8f61846a1aa02b8605402",
+  "created_at": "2020-11-18T19:33:20.954Z",
+  "updated_at": "2020-11-18T19:33:20.954Z",
+  "__v": 0
+},{
+  "_id": "5fba4f0037800146e835ebf8",
+  "notes_history": [],
+  "shared_users_info": [],
+  "latest_note": "5fb573ce01ad58483392084f",
+  "created_by": "5fb8f61846a1aa02b8605402",
+  "created_at": "2020-11-18T19:33:20.954Z",
+  "updated_at": "2020-11-18T19:33:20.954Z",
+  "__v": 0
+},{
+  "_id": "5fba4f0037800146e835ebf9",
+  "notes_history": [],
+  "shared_users_info": [],
+  "latest_note": "5fb573ce01ad584833920851",
+  "created_by": "5fb8f61846a1aa02b8605402",
+  "created_at": "2020-11-18T19:33:20.954Z",
+  "updated_at": "2020-11-18T19:33:20.954Z",
+  "__v": 0
+},{
+  "_id": "5fba4f0037800146e835ebfa",
+  "notes_history": [],
+  "shared_users_info": [],
+  "latest_note": "5fb573ce01ad584833920852",
+  "created_by": "5fb8f61846a1aa02b8605402",
+  "created_at": "2020-11-18T19:33:20.954Z",
+  "updated_at": "2020-11-18T19:33:20.954Z",
+  "__v": 0
+},{
+  "_id": "5fba4f0037800146e835ebfb",
+  "notes_history": [],
+  "shared_users_info": [],
+  "latest_note": "5fb573ce01ad584833920853",
+  "created_by": "5fb8f61846a1aa02b8605402",
+  "created_at": "2020-11-18T19:33:20.954Z",
+  "updated_at": "2020-11-18T19:33:20.954Z",
+  "__v": 0
+},{
+  "_id": "5fba4f0037800146e835ebfc",
+  "notes_history": [],
+  "shared_users_info": [],
+  "latest_note": "5fb573ce01ad584833920854",
+  "created_by": "5fb8f61846a1aa02b8605402",
+  "created_at": "2020-11-18T19:33:20.954Z",
+  "updated_at": "2020-11-18T19:33:20.954Z",
+  "__v": 0
+}]

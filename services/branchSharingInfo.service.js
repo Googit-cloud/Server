@@ -1,12 +1,10 @@
 const BranchSharingInfo = require('../models/BranchSharingInfo');
 
 class BranchSharingInfoService {
-  async createBranchSharingInfo(user_id) {
+  async createBranchSharingInfo(user_id, branch_id, has_writing_permission) {
     try {
       return await BranchSharingInfo.create({
-        created_by: user_id,
-        notes: [],
-        shared_users_info: [],
+        user_id, branch_id, has_writing_permission
       });
     } catch (err) {
       throw err;
