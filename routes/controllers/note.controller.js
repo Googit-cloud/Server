@@ -55,3 +55,7 @@ exports.createNote = async (req, res, next) => {
     next(err);
   }
 };
+
+exports.getNote = async (res, req, next) => {
+
+};

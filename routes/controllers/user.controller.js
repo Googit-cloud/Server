@@ -25,3 +25,19 @@ exports.getCurrentUser = async (req, res, next) => {
     });
   }
 };
+
+exports.getUser = async (req, res, next) => {
+  try {
+    const user
+      = await new UserService()
+        .getUserByMongooseId(req.params.user_id);
+
+    res.status(200).json({
+      result: 'ok',
+      user,
+    });
+  } catch (err) {
+    next(err);
+  }
+
+};
