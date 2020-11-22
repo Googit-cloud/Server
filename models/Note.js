@@ -9,12 +9,7 @@ const NoteSchema = new mongoose.Schema({
     type: mongoose.Schema.Types.ObjectId,
     ref: 'Branch',
   },
-  title: {
-    type: String,
-  },
-  content: {
-    type: String,
-  },
+  blocks: [],
   previous_version: {
     type: mongoose.Schema.Types.ObjectId,
     default: null,
