@@ -16,7 +16,7 @@ class BranchService {
 
   async getBranchByMongooseIdAndUpdate(id, branch) {
     try {
-      await Branch.findByIdAndUpdate(
+      return await Branch.findByIdAndUpdate(
         id,
         branch,
         { new: true },
