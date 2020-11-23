@@ -33,6 +33,16 @@ class BranchService {
       throw err;
     }
   }
+
+  async getAllBranchSharingInfo(id) {
+    try {
+      const result = await Branch.findById(id);
+      return result.shared_users_info;
+    } catch (err) {
+      throw err;
+    }
+  }
+
 }
 
 module.exports = BranchService;
