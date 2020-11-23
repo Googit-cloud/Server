@@ -3,10 +3,8 @@ const User = require('../../models/User');
 const BranchSharingInfoService = require('../../services/branchSharingInfo.service');
 const BranchService = require('../../services/branch.service');
 const UserService = require('../../services/user.service');
-
 const Branch = require('../../models/Branch');
 const BranchSharingInfo = require('../../models/BranchSharingInfo');
-const Note = require('../../models/Note');
 
 exports.createBranch = async (req, res, next) => {
   console.log('createBranch!1')
@@ -26,7 +24,7 @@ exports.createBranch = async (req, res, next) => {
     console.log(newBranch._id, 'createBranch!2')
     res.status(201).json({
       result: 'ok',
-      branchId: newBranch._id,
+      newBranch,
       updatedUser,
     });
   } catch (err) {
@@ -200,7 +198,7 @@ exports.getBranches = async (req, res, next) => {
   }
 };
 
-exports.createBranchSharingInfo = async function (req, res, next) {
+exports.createBranchSharingInfo = async (req, res, next) => {
   try {
     const userService = new UserService();
     const branchSharingInfoService = new BranchSharingInfoService();
@@ -254,5 +252,27 @@ exports.createBranchSharingInfo = async function (req, res, next) {
   } catch (err) {
     next(err);
   }
+};
 
+exports.getBranch = async (req, res, next) => {
+  const { branch_id } = req.params;
+
+  try {
+    const branch
+      = await new BranchService().getBranchByMongooseId(branch_id);
+
+    if (!branch) {
+      res.status(400).json({
+        result: 'failure',
+        message: '브랜치가 없습니다',
+      });
+    }
+
+    res.status(200).json({
+      result: 'ok',
+      branch,
+    });
+  } catch (err) {
+    next(err);
+  }
 };
