@@ -14,7 +14,7 @@ exports.createNote = async (req, res, next) => {
         branch_id,
         blocks
       );
-    console.log(newNote);
+
     const newNoteId = newNote._id;
     const branch
       = await branchService.getBranchByMongooseId(branch_id);
@@ -44,18 +44,38 @@ exports.createNote = async (req, res, next) => {
 
     branch.latest_note = newNoteId;
 
-    await branchService
-      .getBranchByMongooseIdAndUpdate(branch_id, branch);
+    const updatedBranch = await branchService
+      .getBranchByMongooseIdAndUpdate(branch._id, branch);
 
     res.status(201).json({
       result: 'ok',
       newNote,
+      updatedBranch
     });
   } catch (err) {
     next(err);
   }
 };
 
-exports.getNote = async (res, req, next) => {
+exports.getNote = async (req, res, next) => {
+  const { note_id } = req.params;
 
+  try {
+    const note
+      = await new NoteService().getNoteByMongooseId(note_id);
+
+    if (!note) {
+      res.status(400).json({
+        result: 'failure',
+        message: '쪽지가 없습니다',
+      });
+    }
+
+    res.status(200).json({
+      result: 'ok',
+      note,
+    });
+  } catch (err) {
+    next(err);
+  }
 };

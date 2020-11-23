@@ -4,7 +4,7 @@ const router = express.Router();
 const verifyToken = require('./middlewares/verifyToken');
 const verifyClaimedUserId = require('./middlewares/verifyClaimedUserId');
 const { getCurrentUser, getUser } = require('./controllers/user.controller');
-const { createBranch, getBranches, createBranchSharingInfo } = require('./controllers/branch.controller');
+const { createBranch, getBranches, createBranchSharingInfo, getBranch } = require('./controllers/branch.controller');
 const { createNote, getNote } = require('./controllers/note.controller');
 
 router.get('/current-user', getCurrentUser);
@@ -49,6 +49,13 @@ router.post(
   verifyToken,
   verifyClaimedUserId,
   createBranchSharingInfo
+);
+
+router.get(
+  '/:user_id/branches/:branch_id/',
+  verifyToken,
+  verifyClaimedUserId,
+  getBranch
 );
 
 module.exports = router;
