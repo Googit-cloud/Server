@@ -1,7 +1,3 @@
-const mongoose = require('mongoose');
-const BranchSharingInfo = require('../../models/BranchSharingInfo');
-const Branch = require('../../models/Branch');
-const User = require('../../models/User');
 const BranchSharingInfoService = require('../../services/branchSharingInfo.service');
 const BranchService = require('../../services/branch.service');
 const UserService = require('../../services/user.service');
@@ -12,20 +8,17 @@ const branchService = new BranchService();
 const branchSharingInfoService = new BranchSharingInfoService();
 const noteService = new NoteService();
 
-
 exports.createBranch = async (req, res, next) => {
   const { user_id } = req.params;
-  const userBranch = new UserService();
-  const branchService = new BranchService();
 
   try {
     const newBranch = await branchService.createBranch(user_id);
-    const user = await userBranch.getUserByMongooseId(user_id);
+    const user = await userService.getUserByMongooseId(user_id);
 
     user.my_branches.push(newBranch._id);
 
     const updatedUser
-      = await new UserService()
+      = await userService
         .getUserByMongooseIdAndUpdate(user_id, user);
 
     res.status(201).json({
@@ -40,36 +33,39 @@ exports.createBranch = async (req, res, next) => {
 
 exports.getBranches = async (req, res, next) => {
   try {
-    console.log('All');
     const limit = parseInt(req.query.limit);
     const skip = parseInt(req.query.skip);
     const userId = req.params.user_id;
     const currentUser = await userService.getUserByMongooseId(userId);
 
     const myBranches = await Promise.all(
-      currentUser.my_branches.map((branchId) => {
+      currentUser.my_branches.map(branchId => {
         return branchService.getBranchByMongooseId(branchId);
       })
     );
 
     const sharedBranchInfos = await Promise.all(
-      currentUser.shared_branches_info.map((branchSharingInfoId) => {
+      currentUser.shared_branches_info.map(branchSharingInfoId => {
         return branchSharingInfoService.getBranchSharingInfoByMongooseId(branchSharingInfoId);
       })
     );
 
     const sharedBranches = await Promise.all(
-      sharedBranchInfos.map((sharedBranchInfo) => {
+      sharedBranchInfos.map(sharedBranchInfo => {
         return branchService.getBranchByMongooseId(sharedBranchInfo.branch_id);
       })
     );
 
     const allBranches = [...myBranches, ...sharedBranches];
     const updatedAllBranches = await Promise.all(
-      allBranches.map(async (branch) => {
+      allBranches.map(async branch => {
         const latestNote = await noteService.getNoteByMongooseId(branch.latest_note);
         branch.latest_note = latestNote;
         return branch;
+        // return {
+        //   branch,
+        //   latestNote,
+        // }
       })
     );
 
@@ -91,7 +87,7 @@ exports.getBranches = async (req, res, next) => {
     const limitedList = [...updatedAllBranches].splice(`${skip}`, `${limit + skip}`);
 
     const listWithEmail = await Promise.all(
-      limitedList.map(async (branch) => {
+      limitedList.map(async branch => {
         const user = await userService.getUserByMongooseId(branch.latest_note.created_by);
 
         return {
@@ -112,24 +108,23 @@ exports.getBranches = async (req, res, next) => {
 
 exports.getPrivateBranches = async (req, res, next) => {
   try {
-    console.log('private');
     const limit = parseInt(req.query.limit);
     const skip = parseInt(req.query.skip);
     const userId = req.params.user_id;
     const currentUser = await userService.getUserByMongooseId(userId);
 
     const myBranches = await Promise.all(
-      currentUser.my_branches.map((branchId) => {
+      currentUser.my_branches.map(branchId => {
         return branchService.getBranchByMongooseId(branchId);
       })
     );
 
     const unSharedBranches = await Promise.all(
-      myBranches.filter((branch) => (!branch.shared_users_info.length))
+      myBranches.filter(branch => (!branch.shared_users_info.length))
     );
 
     const latestNoteInfo = await Promise.all(
-      unSharedBranches.map(async (branch) => {
+      unSharedBranches.map(async branch => {
         const latestNote = await noteService.getNoteByMongooseId(branch.latest_note);
         branch.latest_note = latestNote;
         return branch;
@@ -147,7 +142,7 @@ exports.getPrivateBranches = async (req, res, next) => {
     const limitedList = [...latestNoteInfo].splice(`${skip}`, `${limit + skip}`);
 
     const listWithEmail = await Promise.all(
-      limitedList.map(async (branch) => {
+      limitedList.map(async branch => {
         const user = await userService.getUserByMongooseId(branch.latest_note.created_by);
 
         return {
@@ -172,7 +167,7 @@ exports.getBranch = async (req, res, next) => {
 
   try {
     const branch
-      = await new BranchService().getBranchByMongooseId(branch_id);
+      = await branchService.getBranchByMongooseId(branch_id);
 
     if (!branch) {
       res.status(400).json({

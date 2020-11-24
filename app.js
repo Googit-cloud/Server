@@ -7,31 +7,21 @@ const createError = require('http-errors');
 const express = require('express');
 const logger = require('morgan');
 const cors = require('cors');
-
+const socketIo = require('socket.io');
 const http = require('http');
 
 const app = express();
 const port = '4000';
 const server = http.createServer(app);
-
-const io = require('socket.io')(server, {
+const socket = require('./socket');
+const io = socketIo(server, {
   cors: {
     origin: 'http://localhost:3000',
     methods: ['GET', 'POST']
   }
 });
 
-io.on('connection', socket => {
-  console.log(`socket id ${socket.id} connected`);
-
-  socket.emit('hi');
-
-  socket.on('something', () => console.log('something incoming'));
-
-  socket.on('disconnect', reason => {
-    console.log(`${socket.id} disconnected due to ${reason}`);
-  });
-});
+socket(io);
 
 const index = require('./routes/index');
 const users = require('./routes/users');
