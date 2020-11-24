@@ -40,7 +40,7 @@ exports.createBranch = async (req, res, next) => {
 
 exports.getBranches = async (req, res, next) => {
   try {
-
+    console.log('All');
     const limit = parseInt(req.query.limit);
     const skip = parseInt(req.query.skip);
     const userId = req.params.user_id;
@@ -88,12 +88,102 @@ exports.getBranches = async (req, res, next) => {
       });
     }
 
-    const limited = [...updatedAllBranches].splice(`${skip}`, `${limit + skip}`);
-    console.log(skip, limit);
+    const limitedList = [...updatedAllBranches].splice(`${skip}`, `${limit + skip}`);
+
+    const listWithEmail = await Promise.all(
+      limitedList.map(async (branch) => {
+        const user = await userService.getUserByMongooseId(branch.latest_note.created_by);
+
+        return {
+          email: user.email,
+          branch
+        };
+      })
+    );
 
     res.status(200).json({
       result: 'ok',
-      data: limited
+      data: listWithEmail
+    });
+  } catch (err) {
+    next(err);
+  }
+};
+
+exports.getPrivateBranches = async (req, res, next) => {
+  try {
+    console.log('private');
+    const limit = parseInt(req.query.limit);
+    const skip = parseInt(req.query.skip);
+    const userId = req.params.user_id;
+    const currentUser = await userService.getUserByMongooseId(userId);
+
+    const myBranches = await Promise.all(
+      currentUser.my_branches.map((branchId) => {
+        return branchService.getBranchByMongooseId(branchId);
+      })
+    );
+
+    const unSharedBranches = await Promise.all(
+      myBranches.filter((branch) => (!branch.shared_users_info.length))
+    );
+
+    const latestNoteInfo = await Promise.all(
+      unSharedBranches.map(async (branch) => {
+        const latestNote = await noteService.getNoteByMongooseId(branch.latest_note);
+        branch.latest_note = latestNote;
+        return branch;
+      })
+    );
+
+    latestNoteInfo.sort((a, b) => {
+      const left = a.latest_note.updated_at;
+      const right = b.latest_note.updated_at;
+      if (left < right) return 1;
+      else if (left === right) return 0;
+      else return -1;
+    });
+
+    const limitedList = [...latestNoteInfo].splice(`${skip}`, `${limit + skip}`);
+
+    const listWithEmail = await Promise.all(
+      limitedList.map(async (branch) => {
+        const user = await userService.getUserByMongooseId(branch.latest_note.created_by);
+
+        return {
+          email: user.email,
+          branch
+        };
+      })
+    );
+
+    res.status(200).json({
+      result: 'ok',
+      data: listWithEmail
+    });
+  } catch (err) {
+    next(err);
+  }
+
+};
+
+exports.getBranch = async (req, res, next) => {
+  const { branch_id } = req.params;
+
+  try {
+    const branch
+      = await new BranchService().getBranchByMongooseId(branch_id);
+
+    if (!branch) {
+      res.status(400).json({
+        result: 'failure',
+        message: '브랜치가 없습니다',
+      });
+    }
+
+    res.status(200).json({
+      result: 'ok',
+      branch,
     });
   } catch (err) {
     next(err);
@@ -140,35 +230,6 @@ exports.createBranchSharingInfo = async (req, res, next) => {
 
     return res.json({
       result: 'ok',
-    });
-  } catch (err) {
-    next(err);
-  }
-};
-
-exports.getPrivateBranches = async (req, res, next) => {
-  console.log('private');
-};
-
-
-
-exports.getBranch = async (req, res, next) => {
-  const { branch_id } = req.params;
-
-  try {
-    const branch
-      = await new BranchService().getBranchByMongooseId(branch_id);
-
-    if (!branch) {
-      res.status(400).json({
-        result: 'failure',
-        message: '브랜치가 없습니다',
-      });
-    }
-
-    res.status(200).json({
-      result: 'ok',
-      branch,
     });
   } catch (err) {
     next(err);
