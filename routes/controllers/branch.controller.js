@@ -1,10 +1,17 @@
 const mongoose = require('mongoose');
+const BranchSharingInfo = require('../../models/BranchSharingInfo');
+const Branch = require('../../models/Branch');
 const User = require('../../models/User');
 const BranchSharingInfoService = require('../../services/branchSharingInfo.service');
 const BranchService = require('../../services/branch.service');
 const UserService = require('../../services/user.service');
-const Branch = require('../../models/Branch');
-const BranchSharingInfo = require('../../models/BranchSharingInfo');
+const NoteService = require('../../services/note.service');
+
+const userService = new UserService();
+const branchService = new BranchService();
+const branchSharingInfoService = new BranchSharingInfoService();
+const noteService = new NoteService();
+
 
 exports.createBranch = async (req, res, next) => {
   const { user_id } = req.params;
@@ -33,23 +40,68 @@ exports.createBranch = async (req, res, next) => {
 
 exports.getBranches = async (req, res, next) => {
   try {
-    const userService = new UserService();
-    const userId = req.params.user_id;
-    
-    const currentUser = await userService.getUserByMongooseId(userId);
-    console.log(currentUser, 'branchList')
 
+    const limit = parseInt(req.query.limit);
+    const skip = parseInt(req.query.skip);
+    const userId = req.params.user_id;
+    const currentUser = await userService.getUserByMongooseId(userId);
+
+    const myBranches = await Promise.all(
+      currentUser.my_branches.map((branchId) => {
+        return branchService.getBranchByMongooseId(branchId);
+      })
+    );
+
+    const sharedBranchInfos = await Promise.all(
+      currentUser.shared_branches_info.map((branchSharingInfoId) => {
+        return branchSharingInfoService.getBranchSharingInfoByMongooseId(branchSharingInfoId);
+      })
+    );
+
+    const sharedBranches = await Promise.all(
+      sharedBranchInfos.map((sharedBranchInfo) => {
+        return branchService.getBranchByMongooseId(sharedBranchInfo.branch_id);
+      })
+    );
+
+    const allBranches = [...myBranches, ...sharedBranches];
+    const updatedAllBranches = await Promise.all(
+      allBranches.map(async (branch) => {
+        const latestNote = await noteService.getNoteByMongooseId(branch.latest_note);
+        branch.latest_note = latestNote;
+        return branch;
+      })
+    );
+
+    updatedAllBranches.sort((a, b) => {
+      const left = a.latest_note.updated_at;
+      const right = b.latest_note.updated_at;
+      if (left < right) return 1;
+      else if (left === right) return 0;
+      else return -1;
+    });
+
+    if (skip > updatedAllBranches.length - 1) {
+      return res.status(200).json({
+        result: 'no more branches',
+        message: '마지막 노트 입니다.'
+      });
+    }
+
+    const limited = [...updatedAllBranches].splice(`${skip}`, `${limit + skip}`);
+    console.log(skip, limit);
+
+    res.status(200).json({
+      result: 'ok',
+      data: limited
+    });
   } catch (err) {
     next(err);
   }
-}
+};
 
 exports.createBranchSharingInfo = async (req, res, next) => {
   try {
-    const userService = new UserService();
-    const branchSharingInfoService = new BranchSharingInfoService();
-    const branchService = new BranchService();
-
     const branchId = req.params.branch_id;
     const permission = req.body.sharingInfo.permission;
     const email = req.body.sharingInfo.email;
@@ -58,7 +110,7 @@ exports.createBranchSharingInfo = async (req, res, next) => {
     const sharedUser = await userService.getUserByEmail(email);
     const currentBranch = await branchService.getBranchByMongooseId(branchId);
 
-    const isAuthor = await branchSharingInfoService.validateAuthor(currentBranch , email);
+    const isAuthor = await branchSharingInfoService.validateAuthor(currentBranch, email);
 
     if (isAuthor) {
       return res.json({
@@ -67,7 +119,7 @@ exports.createBranchSharingInfo = async (req, res, next) => {
       });
     }
 
-    const hasAlreadyShared = await branchSharingInfoService.validateDuplication(currentBranch , email);
+    const hasAlreadyShared = await branchSharingInfoService.validateDuplication(currentBranch, email);
 
     if (hasAlreadyShared) {
       return res.json({
@@ -88,15 +140,15 @@ exports.createBranchSharingInfo = async (req, res, next) => {
 
     return res.json({
       result: 'ok',
-    })
+    });
   } catch (err) {
     next(err);
   }
 };
 
 exports.getPrivateBranches = async (req, res, next) => {
-  console.log('private')
-}
+  console.log('private');
+};
 
 
 
