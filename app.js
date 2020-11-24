@@ -13,8 +13,25 @@ const http = require('http');
 const app = express();
 const port = '4000';
 const server = http.createServer(app);
-server.listen(port);
-app.set('port', port);
+
+const io = require('socket.io')(server, {
+  cors: {
+    origin: 'http://localhost:3000',
+    methods: ['GET', 'POST']
+  }
+});
+
+io.on('connection', socket => {
+  console.log(`socket id ${socket.id} connected`);
+
+  socket.emit('hi');
+
+  socket.on('something', () => console.log('something incoming'));
+
+  socket.on('disconnect', reason => {
+    console.log(`${socket.id} disconnected due to ${reason}`);
+  });
+});
 
 const index = require('./routes/index');
 const users = require('./routes/users');
@@ -44,5 +61,7 @@ app.use((err, req, res, next) => {
       message,
     });
 });
+
+server.listen(port);
 
 module.exports = app;

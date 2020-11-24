@@ -28,15 +28,15 @@ exports.getCurrentUser = async (req, res, next) => {
   }
 };
 
-exports.getUser = async (req, res, next) => {
+exports.getAuthor = async (req, res, next) => {
   try {
-    const user
+    const author
       = await new UserService()
-        .getUserByMongooseId(req.params.user_id);
+        .getUserByMongooseId(req.params.author_id);
 
     res.status(200).json({
       result: 'ok',
-      user,
+      author,
     });
   } catch (err) {
     next(err);
