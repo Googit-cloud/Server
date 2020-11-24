@@ -4,7 +4,7 @@ const router = express.Router();
 const verifyToken = require('./middlewares/verifyToken');
 const verifyClaimedUserId = require('./middlewares/verifyClaimedUserId');
 const { getCurrentUser, getUser, getSharedUser } = require('./controllers/user.controller');
-const { createBranch, getBranches, createBranchSharingInfo, getBranch } = require('./controllers/branch.controller');
+const { createBranch, getBranches, createBranchSharingInfo, getBranch, getPrivateBranches } = require('./controllers/branch.controller');
 const { createNote, getNote } = require('./controllers/note.controller');
 
 router.get('/current-user', getCurrentUser);
@@ -38,13 +38,21 @@ router.get(
 );
 
 router.get(
+  '/:user_id/branches/private',
+  verifyToken,
+  verifyClaimedUserId,
+  getPrivateBranches
+);
+
+
+router.get(
   '/:user_id/notes/:note_id',
   verifyToken,
   verifyClaimedUserId,
   getNote
 );
 
-router.post(
+router.get(
   '/:user_id/branches/:branch_id/share/users',
   verifyToken,
   verifyClaimedUserId,
