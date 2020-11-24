@@ -3,17 +3,17 @@ const router = express.Router();
 
 const verifyToken = require('./middlewares/verifyToken');
 const verifyClaimedUserId = require('./middlewares/verifyClaimedUserId');
-const { getCurrentUser, getUser, getSharedUser } = require('./controllers/user.controller');
+const { getCurrentUser, getAuthor, getSharedUser } = require('./controllers/user.controller');
 const { createBranch, getBranches, createBranchSharingInfo, getBranch, getPrivateBranches } = require('./controllers/branch.controller');
 const { createNote, getNote } = require('./controllers/note.controller');
 
 router.get('/current-user', getCurrentUser);
 
 router.get(
-  '/:user_id',
+  '/:user_id/users/:author_id',
   verifyToken,
   verifyClaimedUserId,
-  getUser
+  getAuthor
 );
 
 router.post(
