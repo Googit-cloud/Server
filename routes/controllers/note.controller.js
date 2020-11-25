@@ -2,7 +2,6 @@ const NoteService = require('../../services/note.service');
 const BranchService = require('../../services/branch.service');
 
 exports.createNote = async (req, res, next) => {
-  console.log('createNote')
   const blocks = req.body;
   const { user_id, branch_id } = req.params;
   const branchService = new BranchService();

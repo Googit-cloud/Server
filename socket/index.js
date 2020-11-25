@@ -1,7 +1,17 @@
-// const socketIo = io => {
-//   io.on('connection', socket => {
-//     console.log(`socket ${socket.id} connected`);
-//   });
-// };
+const socketIo = io => {
+  io.on('connection', socket => {
+    console.log(`socket ${socket.id} connected`);
 
-// module.exports = socketIo;
+    socket.on('join-room', noteId => {
+      socket.join(noteId);
+    });
+
+    socket.on('sharing-note-typed', (...args) => {
+      const [noteId, noteValue] = args;
+
+      socket.to(noteId).emit('sharing-note-typed', noteValue);
+    });
+  });
+};
+
+module.exports = socketIo;
