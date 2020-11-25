@@ -43,6 +43,13 @@ class BranchService {
     }
   }
 
+  async deleteBranch(id) {
+    try {
+      await Branch.findByIdAndDelete(id);
+    } catch (err) {
+      throw err;
+    }
+  }
 }
 
 module.exports = BranchService;

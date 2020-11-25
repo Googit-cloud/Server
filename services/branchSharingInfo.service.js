@@ -20,16 +20,6 @@ class BranchSharingInfoService {
     }
   }
 
-  async validateAuthor(currentBranch , email) {
-    const userService = new UserService();
-
-    const author = await userService.getUserByMongooseId(currentBranch.created_by);
-    if (author.email === email) return true;
-
-    return false;
-  }
-
-
   async validateDuplication(currentBranch, email) {
     try {
       const userService = new UserService();
@@ -52,6 +42,14 @@ class BranchSharingInfoService {
       if (!alreadySharedUser.length) return false;
 
       return true;
+    } catch (err) {
+      throw err;
+    }
+  }
+
+  async deleteBranchSharingInfo(id) {
+    try {
+      await BranchSharingInfo.findByIdAndDelete(id);
     } catch (err) {
       throw err;
     }

@@ -4,7 +4,14 @@ const router = express.Router();
 const verifyToken = require('./middlewares/verifyToken');
 const verifyClaimedUserId = require('./middlewares/verifyClaimedUserId');
 const { getCurrentUser, getAuthor, getSharedUser } = require('./controllers/user.controller');
-const { createBranch, getBranches, createBranchSharingInfo, getBranch, getPrivateBranches } = require('./controllers/branch.controller');
+const {
+  createBranch,
+  getBranches,
+  createBranchSharingInfo,
+  getBranch,
+  getPrivateBranches,
+  deleteBranch,
+} = require('./controllers/branch.controller');
 const { createNote, getNote } = require('./controllers/note.controller');
 const { getBranchSharingInfo } = require('./controllers/branchSharingInfo.controller');
 
@@ -78,6 +85,13 @@ router.get(
   verifyToken,
   verifyClaimedUserId,
   getBranch
+);
+
+router.delete(
+  '/:user_id/branches/:branch_id',
+  verifyToken,
+  verifyClaimedUserId,
+  deleteBranch
 );
 
 module.exports = router;

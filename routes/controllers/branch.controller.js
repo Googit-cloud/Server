@@ -231,7 +231,7 @@ exports.createBranchSharingInfo = async (req, res, next) => {
     const sharedUser = await userService.getUserByEmail(email);
     const currentBranch = await branchService.getBranchByMongooseId(branchId);
 
-    const isAuthor = await branchSharingInfoService.validateAuthor(currentBranch, email);
+    const isAuthor = await userService.validateAuthor(currentBranch, email);
 
     if (isAuthor) {
       return res.json({
@@ -263,6 +263,68 @@ exports.createBranchSharingInfo = async (req, res, next) => {
       result: 'ok',
     });
   } catch (err) {
+    next(err);
+  }
+};
+
+exports.deleteBranch = async (req, res, next) => {
+  const { branch_id } = req.params;
+
+  try {
+    const branch
+      = await branchService.getBranchByMongooseId(branch_id);
+
+    const sharedUserInfoIds = branch.shared_users_info;
+    for (let i = 0; i < sharedUserInfoIds.length; i++) {
+      const sharedUserInfoId = sharedUserInfoIds[i];
+
+      const sharedUserInfo
+        = await branchSharingInfoService
+          .getBranchSharingInfoByMongooseId(sharedUserInfoId);
+
+      const sharedUser
+        = await userService
+          .getUserByMongooseId(sharedUserInfo.user_id);
+
+      const sharedBranchInfoIds = sharedUser.shared_branches_info;
+      const sharedBranchInfoIdIndex
+        = sharedBranchInfoIds.indexOf(sharedUserInfoId);
+      sharedBranchInfoIds.splice(sharedBranchInfoIdIndex, 1);
+
+      await userService
+        .getUserByMongooseIdAndUpdate(sharedUser._id, sharedUser);
+
+      await branchSharingInfoService
+        .deleteBranchSharingInfo(sharedUserInfoId);
+    }
+
+    for (let i = 0; i < branch.notes_history.length; i++) {
+      const noteId = branch.notes_history[i];
+      await noteService.deleteNote(noteId);
+    }
+
+    await noteService.deleteNote(branch.latest_note);
+
+    const branchCreator
+      = await userService
+        .getUserByMongooseId(branch.created_by);
+
+    const branchIdIndex
+      = branchCreator.my_branches.indexOf(branch_id);
+
+    branchCreator.my_branches.splice(branchIdIndex, 1);
+
+    await userService
+      .getUserByMongooseIdAndUpdate(branchCreator._id, branchCreator);
+
+    await branchService.deleteBranch(branch_id);
+
+    res.status(202).json({
+      result: 'ok',
+      updatedUser: branchCreator,
+    });
+  } catch (err) {
+    console.error(err);
     next(err);
   }
 };

@@ -33,6 +33,14 @@ class NoteService {
       throw err;
     }
   }
+
+  async deleteNote(id) {
+    try {
+      await Note.findByIdAndDelete(id);
+    } catch (err) {
+      throw err;
+    }
+  }
 }
 
 module.exports = NoteService;
