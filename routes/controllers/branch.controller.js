@@ -31,12 +31,37 @@ exports.createBranch = async (req, res, next) => {
   }
 };
 
+function fliterByKeyword(branchesWithNote, keyword) {
+  const textContentsByBranchId = {};
+  branchesWithNote.map(branch => {
+    textContentsByBranchId[branch.branch._id] = [];
+    branch.latestNote.blocks.forEach(block => {
+      if (!block.children[0].text) return;
+      textContentsByBranchId[branch.branch._id].push(block.children[0].text);
+    });
+  });
+
+  const searchedBrancheId = {};
+  const regex = new RegExp(`${keyword}`, 'i');
+  for (let key in textContentsByBranchId) {
+    textContentsByBranchId[key].forEach(cur => {
+      if (!regex.exec(cur)) return;
+      searchedBrancheId[key] = true;
+    });
+  }
+
+  const searchedBranches = branchesWithNote.filter(branch => searchedBrancheId[branch.branch._id]);
+  return searchedBranches;
+}
+
 exports.getBranches = async (req, res, next) => {
   try {
+    const keyword = req.query.q;
     const limit = parseInt(req.query.limit);
     const skip = parseInt(req.query.skip);
     const userId = req.params.user_id;
     const currentUser = await userService.getUserByMongooseId(userId);
+    let keywordSearchedBranches;
 
     const myBranches = await Promise.all(
       currentUser.my_branches.map(branchId => {
@@ -58,7 +83,7 @@ exports.getBranches = async (req, res, next) => {
 
     const allBranches = [...myBranches, ...sharedBranches];
 
-    const updatedAllBranches = await Promise.all(
+    const branchesCombinedWithNote = await Promise.all(
       allBranches.map(async branch => {
         const latestNote = await noteService.getNoteByMongooseId(branch.latest_note);
         return {
@@ -68,7 +93,11 @@ exports.getBranches = async (req, res, next) => {
       })
     );
 
-    updatedAllBranches.sort((a, b) => {
+    keywordSearchedBranches = keyword
+      ? fliterByKeyword(branchesCombinedWithNote, keyword)
+      : branchesCombinedWithNote;
+
+    keywordSearchedBranches.sort((a, b) => {
       const left = a.latestNote.updated_at;
       const right = b.latestNote.updated_at;
       if (left < right) return 1;
@@ -76,7 +105,7 @@ exports.getBranches = async (req, res, next) => {
       else return -1;
     });
 
-    if (skip > updatedAllBranches.length - 1) {
+    if (skip > keywordSearchedBranches.length - 1) {
       return res.status(200).json({
         result: 'no more branches',
         message: '마지막 노트 입니다.'
@@ -84,7 +113,7 @@ exports.getBranches = async (req, res, next) => {
     }
 
 
-    const limitedList = [...updatedAllBranches].splice(`${skip}`, `${limit + skip}`);
+    const limitedList = [...keywordSearchedBranches].splice(`${skip}`, `${limit + skip}`);
 
     const listWithEmail = await Promise.all(
       limitedList.map(async branch => {
@@ -108,10 +137,12 @@ exports.getBranches = async (req, res, next) => {
 
 exports.getPrivateBranches = async (req, res, next) => {
   try {
+    const keyword = req.query.q;
     const limit = parseInt(req.query.limit);
     const skip = parseInt(req.query.skip);
     const userId = req.params.user_id;
     const currentUser = await userService.getUserByMongooseId(userId);
+    let keywordSearchedBranches;
 
     const myBranches = await Promise.all(
       currentUser.my_branches.map(branchId => {
@@ -133,7 +164,11 @@ exports.getPrivateBranches = async (req, res, next) => {
       })
     );
 
-    latestNoteInfo.sort((a, b) => {
+    keywordSearchedBranches = keyword
+      ? fliterByKeyword(latestNoteInfo, keyword)
+      : latestNoteInfo;
+
+    keywordSearchedBranches.sort((a, b) => {
       const left = a.latestNote.updated_at;
       const right = b.latestNote.updated_at;
       if (left < right) return 1;
@@ -141,7 +176,7 @@ exports.getPrivateBranches = async (req, res, next) => {
       else return -1;
     });
 
-    const limitedList = [...latestNoteInfo].splice(`${skip}`, `${limit + skip}`);
+    const limitedList = [...keywordSearchedBranches].splice(`${skip}`, `${limit + skip}`);
 
     const listWithEmail = await Promise.all(
       limitedList.map(async branch => {
