@@ -57,21 +57,20 @@ exports.getBranches = async (req, res, next) => {
     );
 
     const allBranches = [...myBranches, ...sharedBranches];
+
     const updatedAllBranches = await Promise.all(
       allBranches.map(async branch => {
         const latestNote = await noteService.getNoteByMongooseId(branch.latest_note);
-        branch.latest_note = latestNote;
-        return branch;
-        // return {
-        //   branch,
-        //   latestNote,
-        // };
+        return {
+          branch,
+          latestNote,
+        };
       })
     );
 
     updatedAllBranches.sort((a, b) => {
-      const left = a.latest_note.updated_at;
-      const right = b.latest_note.updated_at;
+      const left = a.latestNote.updated_at;
+      const right = b.latestNote.updated_at;
       if (left < right) return 1;
       else if (left === right) return 0;
       else return -1;
@@ -84,15 +83,16 @@ exports.getBranches = async (req, res, next) => {
       });
     }
 
+
     const limitedList = [...updatedAllBranches].splice(`${skip}`, `${limit + skip}`);
 
     const listWithEmail = await Promise.all(
       limitedList.map(async branch => {
-        const user = await userService.getUserByMongooseId(branch.latest_note.created_by);
+        const user = await userService.getUserByMongooseId(branch.latestNote.created_by);
 
         return {
           email: user.email,
-          branch
+          branch,
         };
       })
     );
@@ -126,14 +126,16 @@ exports.getPrivateBranches = async (req, res, next) => {
     const latestNoteInfo = await Promise.all(
       unSharedBranches.map(async branch => {
         const latestNote = await noteService.getNoteByMongooseId(branch.latest_note);
-        branch.latest_note = latestNote;
-        return branch;
+        return {
+          branch,
+          latestNote,
+        };
       })
     );
 
     latestNoteInfo.sort((a, b) => {
-      const left = a.latest_note.updated_at;
-      const right = b.latest_note.updated_at;
+      const left = a.latestNote.updated_at;
+      const right = b.latestNote.updated_at;
       if (left < right) return 1;
       else if (left === right) return 0;
       else return -1;
@@ -143,11 +145,10 @@ exports.getPrivateBranches = async (req, res, next) => {
 
     const listWithEmail = await Promise.all(
       limitedList.map(async branch => {
-        const user = await userService.getUserByMongooseId(branch.latest_note.created_by);
-
+        const user = await userService.getUserByMongooseId(branch.latestNote.created_by);
         return {
           email: user.email,
-          branch
+          branch,
         };
       })
     );
