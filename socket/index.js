@@ -6,6 +6,11 @@ const socketIo = io => {
       socket.join(noteId);
     });
 
+    socket.on('leave-room', noteId => {
+      console.log('leeeeaaaaaaaaavvvvvvvvvvveeeeeeeee roooooooooooooooooooom');
+      socket.leave(noteId);
+    });
+
     socket.on('sharing-note-typed', (...args) => {
       const [noteId, noteValue] = args;
 

@@ -65,7 +65,7 @@ exports.getBranches = async (req, res, next) => {
         // return {
         //   branch,
         //   latestNote,
-        // }
+        // };
       })
     );
 

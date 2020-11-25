@@ -5,7 +5,7 @@ exports.getBranchSharingInfo = async (req, res, next) => {
 
   try {
     const branchSharingInfo
-      = await new BranchService()
+      = await new BranchSharingInfoService()
         .getBranchSharingInfoByMongooseId(branchSharingInfoId);
 
     if (!branchSharingInfo) {
