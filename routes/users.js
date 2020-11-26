@@ -27,6 +27,13 @@ router.get(
 );
 
 router.get(
+  '/:user_id/branches/:branch_id',
+  verifyToken,
+  verifyClaimedUserId,
+  getBranch
+);
+
+router.get(
   '/:user_id/users/:author_id',
   verifyToken,
   verifyClaimedUserId,
