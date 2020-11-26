@@ -15,10 +15,10 @@ const {
 const { createNote, getNote } = require('./controllers/note.controller');
 const { getBranchSharingInfo } = require('./controllers/branchSharingInfo.controller');
 
-router.get('/current-user', getCurrentUser);
+router.get('/current_user', getCurrentUser);
 
 router.get(
-  '/:user_id/branch-sharing-infos/:branch-sharing-info_id',
+  '/:user_id/branch_sharing_infos/:branch_sharing_info_id',
   verifyToken,
   verifyClaimedUserId,
   getBranchSharingInfo

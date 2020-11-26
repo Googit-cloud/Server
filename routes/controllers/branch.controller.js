@@ -62,7 +62,6 @@ exports.getBranches = async (req, res, next) => {
     const userId = req.params.user_id;
     const currentUser = await userService.getUserByMongooseId(userId);
     let keywordSearchedBranches;
-
     const myBranches = await Promise.all(
       currentUser.my_branches.map(branchId => {
         return branchService.getBranchByMongooseId(branchId);
@@ -275,6 +274,7 @@ exports.deleteBranch = async (req, res, next) => {
       = await branchService.getBranchByMongooseId(branch_id);
 
     const sharedUserInfoIds = branch.shared_users_info;
+
     for (let i = 0; i < sharedUserInfoIds.length; i++) {
       const sharedUserInfoId = sharedUserInfoIds[i];
 

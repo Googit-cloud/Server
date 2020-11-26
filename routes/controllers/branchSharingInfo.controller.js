@@ -1,7 +1,7 @@
 const BranchSharingInfoService = require('../../services/branchSharingInfo.service');
 
 exports.getBranchSharingInfo = async (req, res, next) => {
-  const branchSharingInfoId = req.params['branch-sharing-info_id'];
+  const branchSharingInfoId = req.params['branch_sharing_info_id'];
 
   try {
     const branchSharingInfo
