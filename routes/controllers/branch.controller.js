@@ -325,6 +325,89 @@ exports.deleteBranch = async (req, res, next) => {
     });
   } catch (err) {
     console.error(err);
+  }
+};
+
+exports.updateSharedUserPermission = async (req, res, next) => {
+  try {
+
+    const branchId = req.params.branch_id;
+    const permission = req.body.newPermission === 'write';
+    const sharedUserEmail = req.body.sharedUserEmail;
+    const currentBranch = await branchService.getBranchByMongooseId(branchId);
+    const sharedUser = await userService.getUserByEmail(sharedUserEmail);
+    let newBranchSharingInfo;
+
+    for (let i = 0; i < currentBranch.shared_users_info.length; i++) {
+
+      const branchSharingInfo
+        = await branchSharingInfoService
+          .getBranchSharingInfoByMongooseId(currentBranch.shared_users_info[i]);
+
+      if (branchSharingInfo.user_id.toString() !== sharedUser._id.toString()) continue;
+
+      branchSharingInfo.has_writing_permission = permission;
+
+      newBranchSharingInfo = await branchSharingInfoService
+        .getBranchSharingInfoByMongooseIdAndUpdate(
+          branchSharingInfo._id,
+          branchSharingInfo
+        );
+
+    }
+    console.log(newBranchSharingInfo, 'update');
+    return res.json({
+      result: 'ok',
+      data: {
+        permission: newBranchSharingInfo.has_writing_permission ? 'write' : 'read only',
+        sharedUser
+      }
+    });
+
+  } catch (err) {
+    next(err);
+  }
+};
+
+exports.deleteSharedUserPermission = async (req, res, next) => {
+  try {
+    const branchId = req.params.branch_id;
+    const sharedUserEmail = req.body.sharedUserEmail;
+    const currentBranch = await branchService.getBranchByMongooseId(branchId);
+    const sharedUser = await userService.getUserByEmail(sharedUserEmail);
+
+    for (let i = 0; i < currentBranch.shared_users_info.length; i++) {
+
+      const branchSharingInfo
+        = await branchSharingInfoService
+          .getBranchSharingInfoByMongooseId(currentBranch.shared_users_info[i]);
+
+      if (branchSharingInfo.user_id.toString() !== sharedUser._id.toString()) continue;
+
+      const updatedSharedBranchesInfo
+        = sharedUser.shared_branches_info.filter(branchSharingInfoId => (
+          branchSharingInfoId.toString() !== branchSharingInfo._id.toString()
+        ));
+
+      sharedUser.shared_branches_info = updatedSharedBranchesInfo;
+      await userService.getUserByMongooseIdAndUpdate(sharedUser._id, sharedUser);
+
+      const updatedSharedUsersInfo
+        = currentBranch.shared_users_info.filter(branchSharingInfoId => (
+          branchSharingInfoId.toString() !== branchSharingInfo._id.toString()
+        ));
+
+      currentBranch.shared_users_info = updatedSharedUsersInfo;
+      await branchService.getBranchByMongooseIdAndUpdate(currentBranch._id, currentBranch);
+
+      await branchSharingInfoService.getBranchSharingInfoByMongooseIdAndDelete(branchSharingInfo._id);
+    }
+
+    return res.status(200).json({
+      result: 'ok',
+    });
+
+  } catch (err) {
     next(err);
   }
 };

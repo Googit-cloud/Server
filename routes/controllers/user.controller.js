@@ -53,37 +53,25 @@ exports.getSharedUser = async (req, res, next) => {
 
     const branchSharingInfoIds = await branchService.getAllBranchSharingInfo(branchId);
 
-    if (!branchSharingInfoIds.length) {
-      return res.status(200).json({
-        result: 'not exist',
-        message: '현재 노트를 공유하고 있는 유저가 없습니다.'
-      });
-    }
-
     const branchSharingInfos = await Promise.all(
       branchSharingInfoIds.map((id) => (
         branchSharingInfoService.getBranchSharingInfoByMongooseId(id)
       ))
     );
 
-    const sharedUsers = await Promise.all(
-      branchSharingInfos.map((info) => (
-        userService.getUserByMongooseId(info.user_id)
-      ))
+    const sharedUserInfoWithPermission = await Promise.all(
+      branchSharingInfos.map(async (info) => {
+        const sharedUser = await userService.getUserByMongooseId(info.user_id);
+        return {
+          permission: info.has_writing_permission ? 'write' : 'read only',
+          sharedUser
+        };
+      })
     );
-
-    const sharedUserEmails = sharedUsers.map(user => (user.email));
-
-    if (!sharedUserEmails.length) {
-      return res.status(200).json({
-        result: 'not exist',
-        message: '현재 노트를 공유하고 있는 유저가 없습니다.'
-      });
-    }
 
     return res.status(200).json({
       result: 'ok',
-      sharedUserEmails,
+      data: sharedUserInfoWithPermission,
     });
   } catch (err) {
     next(err);
