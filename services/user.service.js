@@ -46,6 +46,15 @@ class UserService {
       throw err;
     }
   }
+
+  async validateAuthor(currentBranch, email) {
+    const userService = new UserService();
+
+    const author = await userService.getUserByMongooseId(currentBranch.created_by);
+    if (author.email === email) return true;
+
+    return false;
+  }
 }
 
 module.exports = UserService;

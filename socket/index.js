@@ -7,7 +7,6 @@ const socketIo = io => {
     });
 
     socket.on('leave-room', noteId => {
-      console.log('leeeeaaaaaaaaavvvvvvvvvvveeeeeeeee roooooooooooooooooooom');
       socket.leave(noteId);
     });
 
