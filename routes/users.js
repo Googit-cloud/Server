@@ -11,6 +11,8 @@ const {
   getBranch,
   getPrivateBranches,
   deleteBranch,
+  updateSharedUserPermission,
+  deleteSharedUserPermission,
 } = require('./controllers/branch.controller');
 const { createNote, getNote } = require('./controllers/note.controller');
 const { getBranchSharingInfo } = require('./controllers/branchSharingInfo.controller');
@@ -80,11 +82,18 @@ router.post(
   createBranchSharingInfo
 );
 
-router.get(
-  '/:user_id/branches/:branch_id',
+router.put(
+  '/:user_id/branches/:branch_id/permission/update',
   verifyToken,
   verifyClaimedUserId,
-  getBranch
+  updateSharedUserPermission
+);
+
+router.delete(
+  '/:user_id/branches/:branch_id/permission/delete',
+  verifyToken,
+  verifyClaimedUserId,
+  deleteSharedUserPermission
 );
 
 router.delete(
