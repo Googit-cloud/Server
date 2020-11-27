@@ -33,6 +33,13 @@ router.get(
 );
 
 router.get(
+  '/:user_id/branches/private',
+  verifyToken,
+  verifyClaimedUserId,
+  getPrivateBranches
+);
+
+router.get(
   '/:user_id/branches/:branch_id',
   verifyToken,
   verifyClaimedUserId,
@@ -65,13 +72,6 @@ router.get(
   verifyToken,
   verifyClaimedUserId,
   getBranches
-);
-
-router.get(
-  '/:user_id/branches/private',
-  verifyToken,
-  verifyClaimedUserId,
-  getPrivateBranches
 );
 
 router.get(

@@ -20,7 +20,6 @@ const io = socketIo(server, {
     methods: ['GET', 'POST']
   }
 });
-
 socket(io);
 
 const index = require('./routes/index');
@@ -39,6 +38,8 @@ app.use((req, res, next) => {
 });
 
 app.use((err, req, res, next) => {
+  console.error(err);
+
   const message
     = err.statusCode === 404
       ? err.message

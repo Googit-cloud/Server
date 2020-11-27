@@ -1,6 +1,7 @@
 const UserService = require('../../services/user.service');
 const { encode } = require('../../utils/jwt');
 const { responseResults } = require('../../constants');
+const tryCatchWrapper = require('../../utils/tryCatchWrapper');
 
 const userService = new UserService();
 
@@ -26,16 +27,9 @@ exports.registerUser = async (req, res, next) => {
   }
 };
 
-exports.loginUser = async (req, res, next) => {
+exports.loginUser = tryCatchWrapper(async (req, res) => {
   const { email } = req.body;
-  let user;
-
-  try {
-    user = await userService.getUserByEmail(email);
-  } catch (err) {
-
-    next(err);
-  }
+  const user = await userService.getUserByEmail(email);
 
   if (!user) {
     res.status(404).json({
@@ -51,4 +45,4 @@ exports.loginUser = async (req, res, next) => {
     user,
     token,
   });
-};
+});
