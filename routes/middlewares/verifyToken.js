@@ -1,5 +1,6 @@
 const UserService = require('../../services/user.service');
 const { decode } = require('../../utils/jwt');
+const { responseResults } = require('../../constants');
 
 const verifyToken = async (req, res, next) => {
   const token = req.headers.authorization.split(' ')[1];
@@ -13,7 +14,7 @@ const verifyToken = async (req, res, next) => {
 
     if (!user) {
       res.status(404).json({
-        result: 'failure',
+        result: responseResults.FAILURE,
         message: '이용자를 찾지 못했어요',
       });
     }

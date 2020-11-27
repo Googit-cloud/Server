@@ -1,4 +1,5 @@
 const Branch = require('../models/Branch');
+const tryCatchWrapper = require('../utils/tryCatchWrapper');
 
 class BranchService {
   async createBranch(user_id) {
