@@ -95,22 +95,23 @@ exports.getBranches = tryCatchWrapper(async (req, res) => {
     = [...keywordSearchedBranches]
       .splice(`${skip}`, `${limit + skip}`);
 
-  const listWithEmail = await Promise.all(
+  const listWithUserName = await Promise.all(
     limitedList.map(async branch => {
       const user
         = await userService
           .getUserByMongooseId(branch.latestNote.created_by);
 
       return {
-        email: user.email,
-        branch,
+        author: user,
+        branch: branch.branch,
+        latestNote: branch.latestNote
       };
     })
   );
 
   res.status(200).json({
     result: responseResults.OK,
-    data: listWithEmail
+    data: listWithUserName
   });
 });
 
@@ -134,7 +135,7 @@ exports.getPrivateBranches = tryCatchWrapper(async (req, res) => {
     unSharedBranches.map(async branch => {
       const latestNote
         = await noteService.getNoteByMongooseId(branch.latest_note);
-
+      console.log(branch, 'l');
       return {
         branch,
         latestNote,
