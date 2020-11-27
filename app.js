@@ -2,6 +2,7 @@ if (process.env.NODE_ENV !== 'production') {
   require('dotenv').config();
 }
 require('./loaders/db')();
+const { paths, responseResults, httpMethods } = require('./constants');
 
 const createError = require('http-errors');
 const express = require('express');
@@ -11,13 +12,12 @@ const socketIo = require('socket.io');
 const http = require('http');
 
 const app = express();
-const port = '4000';
 const server = http.createServer(app);
 const socket = require('./socket');
 const io = socketIo(server, {
   cors: {
-    origin: 'http://localhost:3000',
-    methods: ['GET', 'POST']
+    origin: process.env.ORIGIN_URL,
+    methods: [httpMethods.GET, httpMethods.POST],
   }
 });
 socket(io);
@@ -48,11 +48,11 @@ app.use((err, req, res, next) => {
   res
     .status(err.statusCode || 500)
     .json({
-      result: 'failure',
+      result: responseResults.FAILURE,
       message,
     });
 });
 
-server.listen(port);
+server.listen(paths.PORT);
 
 module.exports = app;
