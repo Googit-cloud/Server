@@ -16,3 +16,12 @@ exports.socketEvents = {
   LEAVE_ROOM: 'leave-room',
   SHARING_NOTE_TYPED: 'sharing-note-typed',
 };
+
+exports.paths = {
+  PORT: '4000',
+};
+
+exports.httpMethods = {
+  GET: 'GET',
+  POST: 'POST',
+};
