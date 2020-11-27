@@ -1,11 +1,13 @@
 const NoteService = require('../../services/note.service');
 const BranchService = require('../../services/branch.service');
+const { responseResults } = require('../../constants');
+
+const noteService = new NoteService();
+const branchService = new BranchService();
 
 exports.createNote = async (req, res, next) => {
   const blocks = req.body;
   const { user_id, branch_id } = req.params;
-  const branchService = new BranchService();
-  const noteService = new NoteService();
 
   try {
     const newNote
@@ -48,7 +50,7 @@ exports.createNote = async (req, res, next) => {
       .getBranchByMongooseIdAndUpdate(branch._id, branch);
 
     res.status(201).json({
-      result: 'ok',
+      result: responseResults.OK,
       newNote,
       updatedBranch
     });
@@ -62,17 +64,17 @@ exports.getNote = async (req, res, next) => {
 
   try {
     const note
-      = await new NoteService().getNoteByMongooseId(note_id);
+      = await noteService.getNoteByMongooseId(note_id);
 
     if (!note) {
       res.status(400).json({
-        result: 'failure',
+        result: responseResults.FAILURE,
         message: '쪽지가 없습니다',
       });
     }
 
     res.status(200).json({
-      result: 'ok',
+      result: responseResults.OK,
       note,
     });
   } catch (err) {

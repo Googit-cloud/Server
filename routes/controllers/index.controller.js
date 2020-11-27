@@ -1,18 +1,21 @@
 const UserService = require('../../services/user.service');
-const jwt = require('jsonwebtoken');
+const { encode } = require('../../utils/jwt');
+const { responseResults } = require('../../constants');
+
+const userService = new UserService();
 
 exports.registerUser = async (req, res, next) => {
   const { uid, email, displayName, photoURL } = req.body;
 
   try {
-    await new UserService()
+    await userService
       .createUser(uid, email, displayName, photoURL);
 
-    res.status(201).json({ result: 'ok' });
+    res.status(201).json({ result: responseResults.OK });
   } catch (err) {
     if (err.message.includes('duplicate key error')) {
       res.status(303).json({
-        result: 'failure',
+        result: responseResults.FAILURE,
         message: '이미 가입했어요',
       });
 
@@ -28,7 +31,7 @@ exports.loginUser = async (req, res, next) => {
   let user;
 
   try {
-    user = await new UserService().getUserByEmail(email);
+    user = await userService.getUserByEmail(email);
   } catch (err) {
 
     next(err);
@@ -36,18 +39,15 @@ exports.loginUser = async (req, res, next) => {
 
   if (!user) {
     res.status(404).json({
-      result: 'failure',
+      result: responseResults.FAILURE,
       message: '가입하지 않은 사용자예요',
     });
   }
 
-  const token = jwt.sign(
-    JSON.stringify(user),
-    process.env.JWT_SECRET_KEY
-  );
+  const token = encode(user);
 
   res.status(200).json({
-    result: 'ok',
+    result: responseResults.OK,
     user,
     token,
   });

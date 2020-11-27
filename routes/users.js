@@ -1,21 +1,27 @@
 const express = require('express');
 const router = express.Router();
 
-const verifyToken = require('./middlewares/verifyToken');
-const verifyClaimedUserId = require('./middlewares/verifyClaimedUserId');
-const { getCurrentUser, getAuthor, getSharedUser } = require('./controllers/user.controller');
+const {
+  getCurrentUser,
+  getAuthor,
+  getSharedUserInfos,
+} = require('./controllers/user.controller');
 const {
   createBranch,
   getBranches,
-  createBranchSharingInfo,
   getBranch,
   getPrivateBranches,
   deleteBranch,
-  updateSharedUserPermission,
-  deleteSharedUserPermission,
 } = require('./controllers/branch.controller');
 const { createNote, getNote } = require('./controllers/note.controller');
-const { getBranchSharingInfo } = require('./controllers/branchSharingInfo.controller');
+const {
+  getBranchSharingInfo,
+  createBranchSharingInfo,
+  updateSharedUserPermission,
+  deleteSharedUserPermission,
+} = require('./controllers/branchSharingInfo.controller');
+const verifyToken = require('./middlewares/verifyToken');
+const verifyClaimedUserId = require('./middlewares/verifyClaimedUserId');
 
 router.get('/current_user', getCurrentUser);
 
@@ -79,7 +85,7 @@ router.get(
   '/:user_id/branches/:branch_id/share/users',
   verifyToken,
   verifyClaimedUserId,
-  getSharedUser
+  getSharedUserInfos
 );
 
 router.post(
@@ -90,14 +96,14 @@ router.post(
 );
 
 router.put(
-  '/:user_id/branches/:branch_id/permission/update',
+  '/:user_id/branches/:branch_id/permission',
   verifyToken,
   verifyClaimedUserId,
   updateSharedUserPermission
 );
 
 router.delete(
-  '/:user_id/branches/:branch_id/permission/delete',
+  '/:user_id/branches/:branch_id/permission',
   verifyToken,
   verifyClaimedUserId,
   deleteSharedUserPermission
