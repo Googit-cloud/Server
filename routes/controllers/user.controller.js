@@ -1,28 +1,30 @@
 const UserService = require('../../services/user.service');
 const BranchService = require('../../services/branch.service');
 const BranchSharingInfoService = require('../../services/branchSharingInfo.service');
-const jwt = require('jsonwebtoken');
+const { permissionTypes, responseResults } = require('../../constants');
+const { decode } = require('../../utils/jwt');
+
+const userService = new UserService();
+const branchService = new BranchService();
+const branchSharingInfoService = new BranchSharingInfoService();
 
 exports.getCurrentUser = async (req, res, next) => {
   const token = req.headers.authorization.split(' ')[1];
 
   try {
-    const decoded = jwt.verify(
-      token,
-      process.env.JWT_SECRET_KEY
-    );
+    const decoded = decode(token);
 
     const user
-      = await new UserService()
+      = await userService
         .getUserByMongooseId(decoded._id);
 
     res.status(200).json({
-      result: 'ok',
+      result: responseResults.OK,
       user,
     });
   } catch (err) {
     res.status(400).json({
-      result: 'failure',
+      result: responseResults.FAILURE,
       message: 'bad request'
     });
   }
@@ -31,11 +33,11 @@ exports.getCurrentUser = async (req, res, next) => {
 exports.getAuthor = async (req, res, next) => {
   try {
     const author
-      = await new UserService()
+      = await userService
         .getUserByMongooseId(req.params.author_id);
 
     res.status(200).json({
-      result: 'ok',
+      result: responseResults.OK,
       author,
     });
   } catch (err) {
@@ -44,36 +46,37 @@ exports.getAuthor = async (req, res, next) => {
 
 };
 
-exports.getSharedUser = async (req, res, next) => {
+exports.getSharedUserInfos = async (req, res, next) => {
   try {
-    const branchId = req.params.branch_id;
-    const branchService = new BranchService();
-    const userService = new UserService();
-    const branchSharingInfoService = new BranchSharingInfoService();
+    const { branch_id } = req.params;
 
-    const branchSharingInfoIds = await branchService.getAllBranchSharingInfo(branchId);
+    const branch
+      = await branchService.getBranchByMongooseId(branch_id);
 
     const branchSharingInfos = await Promise.all(
-      branchSharingInfoIds.map((id) => (
+      branch.sharing_infos.map(id => (
         branchSharingInfoService.getBranchSharingInfoByMongooseId(id)
       ))
     );
 
-    const sharedUserInfoWithPermission = await Promise.all(
-      branchSharingInfos.map(async (info) => {
-        const sharedUser = await userService.getUserByMongooseId(info.user_id);
+    const sharedUserInfos = await Promise.all(
+      branchSharingInfos.map(async info => {
+        const sharedUser
+          = await userService.getUserByMongooseId(info.user_id);
+
         return {
-          permission: info.has_writing_permission ? 'write' : 'read only',
+          permission: info.has_writing_permission ? permissionTypes.WRITE : permissionTypes.READ_ONLY,
           sharedUser
         };
       })
     );
 
     return res.status(200).json({
-      result: 'ok',
-      data: sharedUserInfoWithPermission,
+      result: responseResults.OK,
+      data: sharedUserInfos,
     });
   } catch (err) {
+    console.error(err);
     next(err);
   }
 };

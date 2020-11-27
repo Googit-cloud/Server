@@ -10,7 +10,7 @@ const BranchSchema = new mongoose.Schema({
     type: mongoose.Schema.Types.ObjectId,
     ref: 'Note',
   }],
-  shared_users_info: [{
+  sharing_infos: [{
     type: mongoose.Schema.Types.ObjectId,
     ref: 'BranchSharingInfo',
   }],

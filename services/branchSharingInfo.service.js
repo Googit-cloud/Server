@@ -42,8 +42,10 @@ class BranchSharingInfoService {
 
   async validateAuthor(currentBranch, email) {
     const userService = new UserService();
+    const author
+      = await userService
+        .getUserByMongooseId(currentBranch.created_by);
 
-    const author = await userService.getUserByMongooseId(currentBranch.created_by);
     if (author.email === email) return true;
 
     return false;
@@ -53,21 +55,23 @@ class BranchSharingInfoService {
     try {
       const userService = new UserService();
 
-      if (!currentBranch.shared_users_info.length) return false;
+      if (!currentBranch.sharing_infos.length) return false;
 
       const currentBranchSharingInfo = await Promise.all(
-        currentBranch.shared_users_info.map((id) => (
+        currentBranch.sharing_infos.map(id => (
           this.getBranchSharingInfoByMongooseId(id)
         ))
       );
 
       const sharedUsers = await Promise.all(
-        currentBranchSharingInfo.map((branchSharingInfo) => (
+        currentBranchSharingInfo.map(branchSharingInfo => (
           userService.getUserByMongooseId(branchSharingInfo.user_id)
         ))
       );
 
-      const alreadySharedUser = sharedUsers.filter((user) => (user.email === email));
+      const alreadySharedUser
+        = sharedUsers.filter(user => user.email === email);
+
       if (!alreadySharedUser.length) return false;
 
       return true;

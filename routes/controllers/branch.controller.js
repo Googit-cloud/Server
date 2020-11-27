@@ -1,12 +1,13 @@
-const BranchSharingInfoService = require('../../services/branchSharingInfo.service');
-const BranchService = require('../../services/branch.service');
 const UserService = require('../../services/user.service');
 const NoteService = require('../../services/note.service');
+const BranchService = require('../../services/branch.service');
+const BranchSharingInfoService = require('../../services/branchSharingInfo.service');
+const { responseResults } = require('../../constants');
 
 const userService = new UserService();
+const noteService = new NoteService();
 const branchService = new BranchService();
 const branchSharingInfoService = new BranchSharingInfoService();
-const noteService = new NoteService();
 
 exports.createBranch = async (req, res, next) => {
   const { user_id } = req.params;
@@ -22,7 +23,7 @@ exports.createBranch = async (req, res, next) => {
         .getUserByMongooseIdAndUpdate(user_id, user);
 
     res.status(201).json({
-      result: 'ok',
+      result: responseResults.OK,
       newBranch,
       updatedUser,
     });
@@ -31,26 +32,36 @@ exports.createBranch = async (req, res, next) => {
   }
 };
 
-function fliterByKeyword(branchesWithNote, keyword) {
+function filterByKeyword(branchesWithNote, keyword) {
   const textContentsByBranchId = {};
+
   branchesWithNote.map(branch => {
     textContentsByBranchId[branch.branch._id] = [];
+
     branch.latestNote.blocks.forEach(block => {
       if (!block.children[0].text) return;
-      textContentsByBranchId[branch.branch._id].push(block.children[0].text);
+
+      textContentsByBranchId[branch.branch._id]
+        .push(block.children[0].text);
     });
   });
 
   const searchedBrancheId = {};
   const regex = new RegExp(`${keyword}`, 'i');
-  for (let key in textContentsByBranchId) {
+
+  for (const key in textContentsByBranchId) {
     textContentsByBranchId[key].forEach(cur => {
       if (!regex.exec(cur)) return;
+
       searchedBrancheId[key] = true;
     });
   }
 
-  const searchedBranches = branchesWithNote.filter(branch => searchedBrancheId[branch.branch._id]);
+  const searchedBranches
+    = branchesWithNote.filter(branch => (
+      searchedBrancheId[branch.branch._id]
+    ));
+
   return searchedBranches;
 }
 
@@ -59,24 +70,26 @@ exports.getBranches = async (req, res, next) => {
     const keyword = req.query.q;
     const limit = parseInt(req.query.limit);
     const skip = parseInt(req.query.skip);
-    const userId = req.params.user_id;
-    const currentUser = await userService.getUserByMongooseId(userId);
-    let keywordSearchedBranches;
+    const { user_id } = req.params;
+    const currentUser = await userService.getUserByMongooseId(user_id);
+
     const myBranches = await Promise.all(
       currentUser.my_branches.map(branchId => {
         return branchService.getBranchByMongooseId(branchId);
       })
     );
-
-    const sharedBranchInfos = await Promise.all(
-      currentUser.shared_branches_info.map(branchSharingInfoId => {
-        return branchSharingInfoService.getBranchSharingInfoByMongooseId(branchSharingInfoId);
+    console.log(currentUser);
+    const sharedBranchesInfos = await Promise.all(
+      currentUser.shared_branches_infos.map(branchSharingInfoId => {
+        return branchSharingInfoService
+          .getBranchSharingInfoByMongooseId(branchSharingInfoId);
       })
     );
 
     const sharedBranches = await Promise.all(
-      sharedBranchInfos.map(sharedBranchInfo => {
-        return branchService.getBranchByMongooseId(sharedBranchInfo.branch_id);
+      sharedBranchesInfos.map(sharedBranchInfo => {
+        return branchService
+          .getBranchByMongooseId(sharedBranchInfo.branch_id);
       })
     );
 
@@ -84,7 +97,9 @@ exports.getBranches = async (req, res, next) => {
 
     const branchesCombinedWithNote = await Promise.all(
       allBranches.map(async branch => {
-        const latestNote = await noteService.getNoteByMongooseId(branch.latest_note);
+        const latestNote
+          = await noteService.getNoteByMongooseId(branch.latest_note);
+
         return {
           branch,
           latestNote,
@@ -92,31 +107,36 @@ exports.getBranches = async (req, res, next) => {
       })
     );
 
-    keywordSearchedBranches = keyword
-      ? fliterByKeyword(branchesCombinedWithNote, keyword)
-      : branchesCombinedWithNote;
+    const keywordSearchedBranches
+      = keyword
+        ? filterByKeyword(branchesCombinedWithNote, keyword)
+        : branchesCombinedWithNote;
 
     keywordSearchedBranches.sort((a, b) => {
       const left = a.latestNote.updated_at;
       const right = b.latestNote.updated_at;
+
       if (left < right) return 1;
-      else if (left === right) return 0;
-      else return -1;
+      if (left === right) return 0;
+      return -1;
     });
 
     if (skip > keywordSearchedBranches.length - 1) {
       return res.status(200).json({
-        result: 'no more branches',
-        message: '마지막 노트 입니다.'
+        result: responseResults.NO_MORE_BRANCHES,
+        message: '쪽지를 모두 불러왔습니다',
       });
     }
 
-
-    const limitedList = [...keywordSearchedBranches].splice(`${skip}`, `${limit + skip}`);
+    const limitedList
+      = [...keywordSearchedBranches]
+        .splice(`${skip}`, `${limit + skip}`);
 
     const listWithEmail = await Promise.all(
       limitedList.map(async branch => {
-        const user = await userService.getUserByMongooseId(branch.latestNote.created_by);
+        const user
+          = await userService
+            .getUserByMongooseId(branch.latestNote.created_by);
 
         return {
           email: user.email,
@@ -126,10 +146,11 @@ exports.getBranches = async (req, res, next) => {
     );
 
     res.status(200).json({
-      result: 'ok',
+      result: responseResults.OK,
       data: listWithEmail
     });
   } catch (err) {
+    console.error(err);
     next(err);
   }
 };
@@ -139,9 +160,8 @@ exports.getPrivateBranches = async (req, res, next) => {
     const keyword = req.query.q;
     const limit = parseInt(req.query.limit);
     const skip = parseInt(req.query.skip);
-    const userId = req.params.user_id;
-    const currentUser = await userService.getUserByMongooseId(userId);
-    let keywordSearchedBranches;
+    const { user_id } = req.params;
+    const currentUser = await userService.getUserByMongooseId(user_id);
 
     const myBranches = await Promise.all(
       currentUser.my_branches.map(branchId => {
@@ -150,12 +170,14 @@ exports.getPrivateBranches = async (req, res, next) => {
     );
 
     const unSharedBranches = await Promise.all(
-      myBranches.filter(branch => (!branch.shared_users_info.length))
+      myBranches.filter(branch => !branch.sharing_infos.length)
     );
 
     const latestNoteInfo = await Promise.all(
       unSharedBranches.map(async branch => {
-        const latestNote = await noteService.getNoteByMongooseId(branch.latest_note);
+        const latestNote
+          = await noteService.getNoteByMongooseId(branch.latest_note);
+
         return {
           branch,
           latestNote,
@@ -163,23 +185,30 @@ exports.getPrivateBranches = async (req, res, next) => {
       })
     );
 
-    keywordSearchedBranches = keyword
-      ? fliterByKeyword(latestNoteInfo, keyword)
-      : latestNoteInfo;
+    const keywordSearchedBranches
+      = keyword
+        ? filterByKeyword(latestNoteInfo, keyword)
+        : latestNoteInfo;
 
     keywordSearchedBranches.sort((a, b) => {
       const left = a.latestNote.updated_at;
       const right = b.latestNote.updated_at;
+
       if (left < right) return 1;
-      else if (left === right) return 0;
-      else return -1;
+      if (left === right) return 0;
+      return -1;
     });
 
-    const limitedList = [...keywordSearchedBranches].splice(`${skip}`, `${limit + skip}`);
+    const limitedList
+      = [...keywordSearchedBranches]
+        .splice(`${skip}`, `${limit + skip}`);
 
     const listWithEmail = await Promise.all(
       limitedList.map(async branch => {
-        const user = await userService.getUserByMongooseId(branch.latestNote.created_by);
+        const user
+          = await userService
+            .getUserByMongooseId(branch.latestNote.created_by);
+
         return {
           email: user.email,
           branch,
@@ -188,7 +217,7 @@ exports.getPrivateBranches = async (req, res, next) => {
     );
 
     res.status(200).json({
-      result: 'ok',
+      result: responseResults.OK,
       data: listWithEmail
     });
   } catch (err) {
@@ -206,60 +235,14 @@ exports.getBranch = async (req, res, next) => {
 
     if (!branch) {
       res.status(400).json({
-        result: 'failure',
+        result: responseResults.FAILURE,
         message: '브랜치가 없습니다',
       });
     }
 
     res.status(200).json({
-      result: 'ok',
+      result: responseResults.OK,
       branch,
-    });
-  } catch (err) {
-    next(err);
-  }
-};
-
-exports.createBranchSharingInfo = async (req, res, next) => {
-  try {
-    const branchId = req.params.branch_id;
-    const permission = req.body.sharingInfo.permission;
-    const email = req.body.sharingInfo.email;
-    const hasPermission = (permission === 'write');
-
-    const sharedUser = await userService.getUserByEmail(email);
-    const currentBranch = await branchService.getBranchByMongooseId(branchId);
-
-    const isAuthor = await userService.validateAuthor(currentBranch, email);
-
-    if (isAuthor) {
-      return res.json({
-        result: 'validation err',
-        message: '작성자에게 공유할 수 없습니다.'
-      });
-    }
-
-    const hasAlreadyShared = await branchSharingInfoService.validateDuplication(currentBranch, email);
-
-    if (hasAlreadyShared) {
-      return res.json({
-        result: 'validation err',
-        message: '이미 공유된 유저입니다.'
-      });
-    }
-
-    const branchSharingInfo = await branchSharingInfoService.createBranchSharingInfo(
-      sharedUser._id, branchId, hasPermission
-    );
-
-    currentBranch.shared_users_info.push(branchSharingInfo._id);
-    await branchService.getBranchByMongooseIdAndUpdate(branchId, currentBranch);
-
-    sharedUser.shared_branches_info.push(branchSharingInfo._id);
-    await userService.getUserByMongooseIdAndUpdate(sharedUser._id, sharedUser);
-
-    return res.json({
-      result: 'ok',
     });
   } catch (err) {
     next(err);
@@ -273,7 +256,7 @@ exports.deleteBranch = async (req, res, next) => {
     const branch
       = await branchService.getBranchByMongooseId(branch_id);
 
-    const sharedUserInfoIds = branch.shared_users_info;
+    const sharedUserInfoIds = branch.sharing_infos;
 
     for (let i = 0; i < sharedUserInfoIds.length; i++) {
       const sharedUserInfoId = sharedUserInfoIds[i];
@@ -286,9 +269,10 @@ exports.deleteBranch = async (req, res, next) => {
         = await userService
           .getUserByMongooseId(sharedUserInfo.user_id);
 
-      const sharedBranchInfoIds = sharedUser.shared_branches_info;
+      const sharedBranchInfoIds = sharedUser.shared_branches_infos;
       const sharedBranchInfoIdIndex
         = sharedBranchInfoIds.indexOf(sharedUserInfoId);
+
       sharedBranchInfoIds.splice(sharedBranchInfoIdIndex, 1);
 
       await userService
@@ -320,94 +304,11 @@ exports.deleteBranch = async (req, res, next) => {
     await branchService.deleteBranch(branch_id);
 
     res.status(202).json({
-      result: 'ok',
+      result: responseResults.OK,
       updatedUser: branchCreator,
     });
   } catch (err) {
     console.error(err);
-  }
-};
-
-exports.updateSharedUserPermission = async (req, res, next) => {
-  try {
-
-    const branchId = req.params.branch_id;
-    const permission = req.body.newPermission === 'write';
-    const sharedUserEmail = req.body.sharedUserEmail;
-    const currentBranch = await branchService.getBranchByMongooseId(branchId);
-    const sharedUser = await userService.getUserByEmail(sharedUserEmail);
-    let newBranchSharingInfo;
-
-    for (let i = 0; i < currentBranch.shared_users_info.length; i++) {
-
-      const branchSharingInfo
-        = await branchSharingInfoService
-          .getBranchSharingInfoByMongooseId(currentBranch.shared_users_info[i]);
-
-      if (branchSharingInfo.user_id.toString() !== sharedUser._id.toString()) continue;
-
-      branchSharingInfo.has_writing_permission = permission;
-
-      newBranchSharingInfo = await branchSharingInfoService
-        .getBranchSharingInfoByMongooseIdAndUpdate(
-          branchSharingInfo._id,
-          branchSharingInfo
-        );
-
-    }
-    console.log(newBranchSharingInfo, 'update');
-    return res.json({
-      result: 'ok',
-      data: {
-        permission: newBranchSharingInfo.has_writing_permission ? 'write' : 'read only',
-        sharedUser
-      }
-    });
-
-  } catch (err) {
-    next(err);
-  }
-};
-
-exports.deleteSharedUserPermission = async (req, res, next) => {
-  try {
-    const branchId = req.params.branch_id;
-    const sharedUserEmail = req.body.sharedUserEmail;
-    const currentBranch = await branchService.getBranchByMongooseId(branchId);
-    const sharedUser = await userService.getUserByEmail(sharedUserEmail);
-
-    for (let i = 0; i < currentBranch.shared_users_info.length; i++) {
-
-      const branchSharingInfo
-        = await branchSharingInfoService
-          .getBranchSharingInfoByMongooseId(currentBranch.shared_users_info[i]);
-
-      if (branchSharingInfo.user_id.toString() !== sharedUser._id.toString()) continue;
-
-      const updatedSharedBranchesInfo
-        = sharedUser.shared_branches_info.filter(branchSharingInfoId => (
-          branchSharingInfoId.toString() !== branchSharingInfo._id.toString()
-        ));
-
-      sharedUser.shared_branches_info = updatedSharedBranchesInfo;
-      await userService.getUserByMongooseIdAndUpdate(sharedUser._id, sharedUser);
-
-      const updatedSharedUsersInfo
-        = currentBranch.shared_users_info.filter(branchSharingInfoId => (
-          branchSharingInfoId.toString() !== branchSharingInfo._id.toString()
-        ));
-
-      currentBranch.shared_users_info = updatedSharedUsersInfo;
-      await branchService.getBranchByMongooseIdAndUpdate(currentBranch._id, currentBranch);
-
-      await branchSharingInfoService.getBranchSharingInfoByMongooseIdAndDelete(branchSharingInfo._id);
-    }
-
-    return res.status(200).json({
-      result: 'ok',
-    });
-
-  } catch (err) {
     next(err);
   }
 };

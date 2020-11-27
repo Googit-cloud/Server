@@ -1,19 +1,22 @@
+const { socketEvents } = require('../constants');
+
 const socketIo = io => {
-  io.on('connection', socket => {
+  io.on(socketEvents.CONNENCTION, socket => {
     console.log(`socket ${socket.id} connected`);
 
-    socket.on('join-room', noteId => {
+    socket.on(socketEvents.JOIN_ROOM, noteId => {
       socket.join(noteId);
     });
 
-    socket.on('leave-room', noteId => {
+    socket.on(socketEvents.LEAVE_ROOM, noteId => {
       socket.leave(noteId);
     });
 
-    socket.on('sharing-note-typed', (...args) => {
+    socket.on(socketEvents.SHARING_NOTE_TYPED, (...args) => {
       const [noteId, noteValue] = args;
 
-      socket.to(noteId).emit('sharing-note-typed', noteValue);
+      socket.to(noteId)
+        .emit(socketEvents.SHARING_NOTE_TYPED, noteValue);
     });
   });
 };
