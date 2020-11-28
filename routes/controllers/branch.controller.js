@@ -168,8 +168,9 @@ exports.getPrivateBranches = tryCatchWrapper(async (req, res) => {
           .getUserByMongooseId(branch.latestNote.created_by);
 
       return {
-        email: user.email,
-        branch,
+        author: user,
+        branch: branch.branch,
+        latestNote: branch.latestNote
       };
     })
   );
