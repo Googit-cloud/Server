@@ -5,14 +5,6 @@
   "scripts": {
     "start": "node app.js",
     "dev": "NODE_ENV=development nodemon app.js",
-    "importNote": "node mock/noteMockHandler --import",
-    "deleteNote": "node mock/noteMockHandler --delete",
-    "importUser": "node mock/userMockHandler --import",
-    "deleteUser": "node mock/userMockHandler --delete",
-    "importBranch": "node mock/branchMockHandler --import",
-    "deleteBranch": "node mock/branchMockHandler --delete",
-    "importSharingInfo": "node mock/branchSharingInfoMockHandler --import",
-    "deleteSharingInfo": "node mock/branchSharingInfoMockHandler --delete"
   },
   "dependencies": {
     "cors": "^2.8.5",
@@ -21,11 +13,11 @@
     "http-errors": "~1.6.3",
     "jsonwebtoken": "^8.5.1",
     "mongoose": "^5.10.14",
-    "socket.io": "^3.0.3"
+    "socket.io": "^3.0.3",
+    "dotenv": "^8.2.0"
   },
   "devDependencies": {
     "nodemon": "^2.0.6",
-    "morgan": "~1.9.1",
-    "dotenv": "^8.2.0"
+    "morgan": "~1.9.1"
   }
 }
