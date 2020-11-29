@@ -10,6 +10,7 @@ const logger = require('morgan');
 const cors = require('cors');
 const socketIo = require('socket.io');
 const http = require('http');
+const port = process.env.PORT || paths.PORT;
 
 const app = express();
 const server = http.createServer(app);
@@ -53,6 +54,6 @@ app.use((err, req, res, next) => {
     });
 });
 
-server.listen(paths.PORT);
+server.listen(port);
 
 module.exports = app;
