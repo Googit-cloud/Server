@@ -135,7 +135,7 @@ exports.getPrivateBranches = tryCatchWrapper(async (req, res) => {
     unSharedBranches.map(async branch => {
       const latestNote
         = await noteService.getNoteByMongooseId(branch.latest_note);
-      console.log(branch, 'l');
+
       return {
         branch,
         latestNote,
