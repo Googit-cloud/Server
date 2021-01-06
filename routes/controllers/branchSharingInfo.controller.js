@@ -63,6 +63,7 @@ exports.createBranchSharingInfo = tryCatchWrapper(async (req, res) => {
         branch_id,
         hasPermission
       );
+
   currentBranch.sharing_infos.push(branchSharingInfo._id);
   await branchService.getBranchByMongooseIdAndUpdate(branch_id, currentBranch);
 

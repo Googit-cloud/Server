@@ -36,6 +36,8 @@ exports.loginUser = tryCatchWrapper(async (req, res) => {
       result: responseResults.FAILURE,
       message: '가입하지 않은 사용자예요',
     });
+
+    return;
   }
 
   const token = encode(user);
