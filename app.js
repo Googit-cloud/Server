@@ -17,7 +17,9 @@ const server = http.createServer(app);
 const socket = require('./socket');
 const io = socketIo(server, {
   cors: {
-    origin: process.env.ORIGIN_URL,
+    origin: process.env.NODE_ENV === 'production'
+      ? process.env.DEPLOYED_ORIGIN_URL
+      : process.env.LOCAL_ORIGIN_URL,
     methods: [httpMethods.GET, httpMethods.POST],
   }
 });
