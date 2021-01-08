@@ -16,9 +16,7 @@ const app = express();
 const server = http.createServer(app);
 const socket = require('./socket');
 
-const io = socketIo(server, {
-  origins: 'https://www.googit.cloud: *'
-});
+const io = socketIo(server);
 socket(io);
 
 const index = require('./routes/index');
