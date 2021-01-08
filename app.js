@@ -16,7 +16,13 @@ const app = express();
 const server = http.createServer(app);
 const socket = require('./socket');
 
-const io = socketIo(server);
+const io = socketIo(server, {
+  cors: {
+    origin: process.env.ORIGIN_URL,
+    methods: [httpMethods.GET, httpMethods.POST],
+    credentials: true,
+  }
+});
 socket(io);
 
 const index = require('./routes/index');
