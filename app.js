@@ -17,9 +17,14 @@ const server = http.createServer(app);
 const socket = require('./socket');
 
 const io = socketIo(server, {
-  cors: {
-    origin: process.env.ORIGIN_URL,
-    methods: [httpMethods.GET, httpMethods.POST],
+  handlePreflightRequest: (req, res) => {
+    const headers = {
+      'Access-Control-Allow-Headers': 'Content-Type, Authorization',
+      'Access-Control-Allow-Origin': process.env.ORIGIN_URL,
+      'Access-Control-Allow-Credentials': true
+    };
+    res.writeHead(200, headers);
+    res.end();
   }
 });
 socket(io);
