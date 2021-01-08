@@ -65,7 +65,7 @@
 
         ```jsx
         DB_URL=<mongoDB URL>
-        JWT_SECRET_KEY=<some-temporary-random-long-string-for-jwt-use>\
+        JWT_SECRET_KEY=<some-temporary-random-long-string-for-jwt-use>
         ORIGIN_URL=http://localhost:3000
         ```
 
