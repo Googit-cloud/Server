@@ -28,7 +28,52 @@
 ### 🕹 실행 방법
 
 - 프론트엔드
+    - Git을 이용해 프로젝트를 클론합니다.
+
+        ```jsx
+        git clone https://github.com/Googit-cloud/Client.git
+        cd Client
+        npm install
+        ```
+
+    - root 디렉토리에 .env 파일을 만들고 환경변수를 설정합니다.
+
+        ```jsx
+        REACT_APP_API_KEY=<firebase api key>
+        REACT_APP_AUTH_DOMAIN=<firebase auth domain>
+        REACT_APP_PROJECT_ID=<firebase project id>
+        REACT_APP_APP_ID=<firebase app id>
+        REACT_APP_SERVER_URL=http://localhost:4000
+        ```
+
+    - 애플리케이션을 실행합니다.
+
+        ```jsx
+        npm start
+        ```
+
 - 백엔드
+    - Git을 이용해 프로젝트를 클론합니다.
+
+        ```jsx
+        git clone https://github.com/Googit-cloud/Server.git
+        cd Server
+        npm install
+        ```
+
+    - root 디렉토리에 .env 파일을 만들고 환경변수를 설정합니다.
+
+        ```jsx
+        DB_URL=<mongoDB URL>
+        JWT_SECRET_KEY=<some-temporary-random-long-string-for-jwt-use>\
+        ORIGIN_URL=http://localhost:3000
+        ```
+
+    - 서버를 실행합니다.
+
+        ```jsx
+        npm run dev
+        ```
 
 ---
 
