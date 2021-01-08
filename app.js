@@ -15,12 +15,10 @@ const port = process.env.PORT || paths.PORT;
 const app = express();
 const server = http.createServer(app);
 const socket = require('./socket');
-console.log(process.env.NODE_ENV, process.env.LOCAL_ORIGIN_URL, process.env.DEPLOYED_ORIGIN_URL);
+
 const io = socketIo(server, {
   cors: {
-    origin: process.env.NODE_ENV !== 'development'
-      ? process.env.LOCAL_ORIGIN_URL
-      : process.env.DEPLOYED_ORIGIN_URL,
+    origin: process.env.ORIGIN_URL,
     methods: [httpMethods.GET, httpMethods.POST],
   }
 });
