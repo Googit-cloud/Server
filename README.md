@@ -67,7 +67,6 @@
     - root 디렉토리에 .env 파일을 만들고 환경변수를 설정합니다.
 
         ```jsx
-        npm i -D dotenv
         DB_URL=<mongoDB URL>
         JWT_SECRET_KEY=<some-temporary-random-long-string-for-jwt-use>
         ORIGIN_URL=http://localhost:3000
