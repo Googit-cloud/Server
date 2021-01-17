@@ -74,6 +74,7 @@
     - 서버를 실행합니다.
 
         ```jsx
+        npm i -D nodemon
         npm run dev
         ```
 
